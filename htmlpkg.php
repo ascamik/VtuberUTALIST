@@ -1,0 +1,185 @@
+<?php
+require_once 'Encode.php';
+
+function putHtmlHeader ($title,$h2, $csslk=''){
+//html escape
+$t=e($title);
+$h2e=e($h2);
+
+$source = <<<EOD
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 ,user-scalable=yes" >
+    <meta name="referrer" content="no-referrer">
+    <meta name="copyright" content="(c) ASCAMI.kei 2023-2025">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />-->
+    <link rel="stylesheet" href="standardv2.css?9c6273c3">
+    $csslk
+    <title>$t</title>
+</head>
+<body>
+<main>
+<div id="container">
+    <div id="main">
+        <h1>皇黄リリエ歌リスト〈非公式〉《仮設》</h1>
+        <!--<h1>Sumeragi Lilie Uta List (unofficial)</h1> -->
+ <!-- <div class="attention">お知らせ</div>
+ -->
+<h2>$h2e</h2>
+EOD;
+
+print $source;
+}
+
+function putHtmlContainerClose($jscript=''){
+$source= <<<EOD
+</div>
+</div>
+</main>
+<footer>
+<div id="copyright">(c) ASCAMI Kei</div>
+<div id="footer">
+<a href="about.html">このサイトについて...</a>
+</div>
+</footer>
+$jscript
+    <script>
+        document.getElementById("toggle").addEventListener("change", function () {
+            let image = document.getElementById("hamburger");
+            if (this.checked) {
+                image.src = "close_24dp.svg"; // チェックされたときの画像
+            } else {
+                image.src = "menu_24dp.svg"; // チェックが外れたときの画像
+            }
+        });
+    </script>
+</body>
+</html>
+EOD;
+
+print $source;
+
+}
+
+function putHtmltextarea(){
+    $source= <<<EOD
+    <div class="normalmessage">
+EOD;
+print $source;
+}
+
+function putHtmltextarea_close(){
+    $source= <<<EOD
+    </div><!-- textarea close -->
+EOD;
+print $source;
+}
+
+
+
+
+
+
+function putHtmlNavibar($p = ""){
+$exmenu='';
+if($p=="admin"){
+    $exmenu='<div class="navi_group_dummy_ad"><div class="navi_link_ad"><a href="sen_nowusr.php">管理</a></div></div>';
+}
+
+$source= <<<EOD
+<div id="navicontainer">
+<input id="toggle" type="checkbox">
+<div class="navi_group_dummy">
+    <div class="navi_link_menu"><label for="toggle"><img id="hamburger" src="menu_24dp.svg"></label>
+    </div>
+</div>
+<div class="navi_group_dummy">
+
+<div class="navi_link_home"><a href="./"><img
+                                    src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg" id="fleurDeLis"><!-- <img
+                                    src="home_24dp_2C54B7_FILL0_wght400_GRAD0_opsz24.svg" id="fleurDeLis"> --></a></div>
+</div>
+<div class="navi_group">
+<div class="navi_link"><a href="slistk.php?i=1">数字／英字</a></div>
+<div class="navi_link"><a href="slistk.php?i=a">あ（ゔ）</a></div>
+<div class="navi_link"><a href="slistk.php?i=k">か</a></div>
+<div class="navi_link"><a href="slistk.php?i=s">さ</a></div>
+<div class="navi_link"><a href="slistk.php?i=t">た</a></div>
+<div class="navi_link"><a href="slistk.php?i=n">な</a></div>
+<div class="navi_link"><a href="slistk.php?i=h">は</a></div>
+<div class="navi_link"><a href="slistk.php?i=m">ま</a></div>
+<div class="navi_link"><a href="slistk.php?i=y">や・ら・わ</a></div>
+</div>
+<div class="navi_group_dummy">
+
+<div class="navi_link"><a href="evlist.php">配信一覧</a></div>
+</div>
+<div class="navi_group_dummy">
+
+<div class="navi_link"><a href="searchsong4u.php">検索</a></div>
+</div>
+<div class="navi_group_dummy">
+<div class="navi_link"><a href="ordrlist.php">条件指定一覧</a></div></div>
+{$exmenu}
+
+</div>
+EOD;
+
+print $source;
+}
+
+function putHtmlText ($text){
+    //html escape
+    $t=e($text);
+
+    $tbr=nl2br($t, false);
+    
+    $source = <<<EOD
+
+    <div class="textnote">
+    {$tbr}
+    </div>
+    
+    EOD;
+
+    print $source;
+}
+
+
+
+function putHtmladminmenu(){
+    $source= <<<EOD
+    <div class="normalmessage">
+    <ul class="m">
+    <li><a href="index.html">トップページ</a></li>
+    <li><a href="insertevs.php">(1)新規イベントデータ作成</a></li>
+    <li><a href="insertnvonso2.php">(2)セットリストへ曲追加</a></li>
+<li><a href="udsetlist.php">(3)セットリストの記載内容を修正</a></li>
+    <li><a href="udsong_ex.php">曲データの修正</a></li>
+    <li><a href="udevent.php">イベントデータの修正</a></li>
+    <li><a href="udwsetlist.php">セットリスト変更（曲の追加・削除）</a></li>
+    <li><a href="searchsong.php">曲の検索（リストに出ない曲（歌っていない曲）も対象）</a></li>
+<li><a href="ordrlist_ex.php">全曲一覧（曲管理リンク付き）</a></li>
+   <li>*</li>
+    <li><a href="sen_dumpw0.php">DBダンプ出力（sul/dbb_foldr/krssfansite_db_mysql.dumpを書き出します) </a>【注意】ファイル名は固定で毎回上書きされます. 書き出したダンプファイルをダウンロードするためのリンクは表示されませんので、URLのvsdb以下を左記のパスに書き換えるなど手打ちでダウンロードしてください．ダウンロードにログインは不要です</li>
+
+    </ul>
+    
+    
+    </div>
+EOD;
+print $source;
+}
+
+function putHtmlH3($text){
+    $source= <<<EOD
+    <h3 class="sectiontitle">{$text}</h3>
+EOD;
+print $source;
+}
+

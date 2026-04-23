@@ -1,0 +1,4 @@
+# エディタ/IDE
+.vscode/
+.idea/
+vendor/
