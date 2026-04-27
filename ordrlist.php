@@ -54,7 +54,7 @@ require_once 'OrdrSubNcsv.php';
 //クエリ　ソート
 $icode2sortby = [
     'y' => 'order by tbsong.yomi COLLATE utf8mb4_unicode_ci',
-    'v' => "order by (tbsong.vocap='' AND tbsong.artist='') ASC,CONCAT(tbsong.vocap,tbsong.artist),tbsong.yomi COLLATE utf8mb4_unicode_ci",
+    'v' => "order by (tbsong.vocap='' AND tbsong.artist='') ASC,CONCAT(tbsong.vocap,tbsong.artist) COLLATE utf8mb4_unicode_ci,tbsong.yomi COLLATE utf8mb4_unicode_ci",
     #   'v' => "order by tbsong.vocap='' ASC,tbsong.artist='' ASC,CONCAT(tbsong.vocap,tbsong.artist),tbsong.yomi COLLATE utf8mb4_unicode_ci",
     #    'v' => "order by tbsong.vocap='' ASC,tbsong.artist='' ASC,tbsong.vocap,tbsong.artist,tbsong.yomi COLLATE utf8mb4_unicode_ci",
     'c' => 'order by count(*),songid',
@@ -62,7 +62,7 @@ $icode2sortby = [
     'l' => 'order by max(evdate),songid',
     'm' => 'order by max(evdate) DESC,songid',
     'r' => 'order by tbsong.relsd DESC,songid',
-    'a' => "order by (tbsong.artist='' AND tbsong.vocap='') ASC,CONCAT(tbsong.artist,tbsong.vocap),tbsong.yomi  COLLATE utf8mb4_unicode_ci"
+    'a' => "order by (tbsong.artist='' AND tbsong.vocap='') ASC,CONCAT(tbsong.artist,tbsong.vocap) COLLATE utf8mb4_unicode_ci,tbsong.yomi  COLLATE utf8mb4_unicode_ci"
     #  'a' => "order by tbsong.artist='' ASC,tbsong.vocap='' ASC,CONCAT(tbsong.artist,tbsong.vocap),tbsong.yomi  COLLATE utf8mb4_unicode_ci"
     #   'a' => "order by tbsong.artist='' ASC,tbsong.vocap='' ASC,tbsong.artist,tbsong.vocap,tbsong.yomi  COLLATE utf8mb4_unicode_ci"
 ];
