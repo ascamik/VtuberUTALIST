@@ -121,7 +121,9 @@ if (isset($_POST['keyword'])) {
 
             //           print("<p>$keyword1 , $keyword2</p>")
 ?>
-
+            <div id="jsbutton">
+                <div class="backbutton"><a href="javascript:history.back()"><img src="arrow_back.svg"><span class="jsbuttonspan">戻る</span></a></div>
+            </div>
             <div id="tableoutline">
                 <div class="table">
                     <div class="table_head">

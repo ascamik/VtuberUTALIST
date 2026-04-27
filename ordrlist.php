@@ -175,12 +175,13 @@ if (isset($_GET['mode']) and $_GET['mode'] == 'wikip') {
 
 $title = '全曲（条件指定）';
 $h2 = "全曲一覧・条件指定表示";
-// $note = <<<EOD
-// こちらは実験的ページです。データベースの負荷により、動作しない場合があります。もし、応答がない／エラーになる場合は1分ほど待って再読込をお試し下さい。再度エラーになるようなら操作を中止して、ページを閉じてください
-// EOD;
+
+/*
 $note = <<<EOD
 原曲リリース日の色分けは試験的実装です。今後区分・色が変更されるかもしれません。
 EOD;
+*/
+
 $aditionalcss = '<link rel="stylesheet" href="table-grid-resp.css?b2e5aa2e">';
 putHtmlHeader($title, $h2, $aditionalcss);
 //putHtmlHeader($title, $h2);
@@ -205,9 +206,9 @@ putHtmlNavibar();
         <div class="formparts">
 
             <label class="label">並べ替え</label>
-            <input type="radio" name="sort" value="y" <?= $getsortstr == 'y' ? 'checked' : '' ?>><label>曲名〔</label>
+            <input type="radio" name="sort" value="y" <?= $getsortstr == 'y' ? 'checked' : '' ?>><label>曲名</label>
             <input type="radio" name="sort" value="a" <?= $getsortstr == 'a' ? 'checked' : '' ?>><label>アーティスト/ボカロP </label>
-            <input type="radio" name="sort" value="v" <?= $getsortstr == 'v' ? 'checked' : '' ?>><label>同左（ボカロP優先）〕</label>
+            <input type="radio" name="sort" value="v" <?= $getsortstr == 'v' ? 'checked' : '' ?>><label>同左（ボカロP優先）</label>
             <input type="radio" name="sort" value="c" <?= $getsortstr == 'c' ? 'checked' : '' ?>><label>回数（少）</label>
             <input type="radio" name="sort" value="d" <?= $getsortstr == 'd' ? 'checked' : '' ?>><label>回数（多）</label>
             <input type="radio" name="sort" value="l" <?= $getsortstr == 'l' ? 'checked' : '' ?>><label>直近日付（昔）</label>
@@ -216,7 +217,7 @@ putHtmlNavibar();
         </div>
         <div class="formparts">
 
-            <label class="label">動画の扱い</label>
+            <label class="label">動画(L:LilieLied)の扱い</label>
             <input type="radio" name="ex" value="0" <?= $ex_v != '1' ? 'checked' : '' ?>><label>ライブと同様に扱う（表示する）
                 <input type="radio" name="ex" value="1" <?= $ex_v == '1' ? 'checked' : '' ?>><label>除外する
 

@@ -61,4 +61,5 @@ putHtmlNavibar();
     <div>リリース日の色分け <span class="new">現在から1年以内 </span><span class="rei"> 令和(2019.5〜) </span><span class="mil"> 平成中後期(2001〜2019.4) </span><span class="her"> 平成初期(1989〜2000) </span><span class="syo"> 1988年以前 </span></div>
 </div><!-- tableoutline -->
 <?php
+
 putHtmlContainerClose();

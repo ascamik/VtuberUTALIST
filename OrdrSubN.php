@@ -7,6 +7,19 @@ require_once 'Relsd2cssclass.php';
 ?>
 <?php
 
+function s($word)
+{
+    if ($word == "") {
+        $html = "";
+    } else {
+        $eword = e($word);
+        $html = "<a href=\"javascript:void(0)\" onclick=\"sendPost('$eword', 'artistandp')\">{$eword}</a>";
+    }
+    return $html;
+}
+
+
+
 function putHtmlOrdrTable($order, $on_genre, $limit, $nomedia = '',  $having = '', $mode = '')
 {
 
@@ -82,7 +95,7 @@ function putHtmlOrdrTable($order, $on_genre, $limit, $nomedia = '',  $having = '
 
 
 
-                            <div class="cell"><?= e($row['artist']) . (($row['artist'] and $row['vocap']) ? "/" : "") .  e($row['vocap']) ?></div>
+                            <div class="cell"><?= s($row['artist']) . (($row['artist'] and $row['vocap']) ? "/" : "") .  s($row['vocap']) ?></div>
                             <!--<td><?= e($row['vocap']) ?></td>-->
                             <div class="cell <?= $relsd ? relclass($relsd) : '' ?>"><span title="<?= $relsd ?>"><?= e($relsyear) ?></span></div>
                             <div class="cell"><?= e($row['tieup']) ?></div>
@@ -108,7 +121,32 @@ function putHtmlOrdrTable($order, $on_genre, $limit, $nomedia = '',  $having = '
                 ?>
             </div> <!-- tbody close -->
         </div><!-- table close -->
+        <script>
+            function sendPost(searchWord, target) {
+                // 送信用の隠しフォームを動的に生成
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'searchsong4u.php'; // 送信先URL
 
+                // 1つ目のデータ（キーワード）
+                const inputWord = document.createElement('input');
+                inputWord.type = 'hidden';
+                inputWord.name = 'keyword';
+                inputWord.value = searchWord;
+                form.appendChild(inputWord);
+
+                // 2つ目のデータ（検索ターゲット）
+                const inputTarget = document.createElement('input');
+                inputTarget.type = 'hidden';
+                inputTarget.name = 'target';
+                inputTarget.value = target;
+                form.appendChild(inputTarget);
+
+                // フォームを本体に追加して送信
+                document.body.appendChild(form);
+                form.submit();
+            }
+        </script>
 
 
 
