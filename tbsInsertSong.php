@@ -35,7 +35,7 @@ function insertSongtbs(string  $sname, string  $yomi, string $genre, string $org
         $narrng = "0";
     }
 
-
+    $yomi = mb_convert_kana($yomi, 'c'); //Katakana => HIRAGANA convert
 
 
     try {

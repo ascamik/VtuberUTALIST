@@ -112,7 +112,7 @@ if ($_POST['sname'] and $_POST['yomi']) {
 
             try {
                 $db = getDb();
-
+                $yomi = mb_convert_kana($_POST['yomi'], 'c'); //Katakana => HIRAGANA convert
 
 
 
@@ -121,7 +121,7 @@ if ($_POST['sname'] and $_POST['yomi']) {
                 $s->bindValue(':songid', $songid);
                 $s->bindValue(':arrng', $arrng);
                 $s->bindValue(':sname', $_POST['sname']);
-                $s->bindValue(':yomi', $_POST['yomi']);
+                $s->bindValue(':yomi', $yomi);
                 $s->bindValue(':artist', $_POST['artist']);
                 $s->bindValue(':tieup', $_POST['tieup']);
                 $s->bindValue(':vocap', $_POST['vocap']);
