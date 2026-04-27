@@ -31,6 +31,9 @@ if ($pageSize < $eventCount) {
     $currentPage = 1;
     if (isset($_GET['p'])) {
         $currentPage = intval($_GET['p']) <= $pageMax ? intval($_GET['p']) : $pageMax;
+        if ($currentPage < 1) {
+            $currentPage = 1;
+        }
     }
     $offset = ($currentPage - 1) * $pageSize;
     $pagenation = "LIMIT {$pageSize} OFFSET {$offset}";
