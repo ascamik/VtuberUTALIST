@@ -26,8 +26,8 @@ $source = <<<EOD
 <main>
 <div id="container">
     <div id="main">
-        <h1>V様歌リスト</h1>
-        <!--<h1>Uta List (unofficial)</h1> -->
+        <h1>皇黄リリエ歌リスト〈非公式〉《仮設》</h1>
+        <!--<h1>Sumeragi Lilie Uta List (unofficial)</h1> -->
  <!-- <div class="attention">お知らせ</div>
  -->
 <h2>$h2e</h2>
@@ -166,7 +166,7 @@ function putHtmladminmenu(){
     <li><a href="searchsong.php">曲の検索（リストに出ない曲（歌っていない曲）も対象）</a></li>
 <li><a href="ordrlist_ex.php">全曲一覧（曲管理リンク付き）</a></li>
    <li>*</li>
-    <li><a href="sen_dumpw0.php">DBダンプ出力（.../dbb_foldr/krssfansite_db_mysql.dumpを書き出します) </a>【注意】ファイル名は固定で毎回上書きされます. 書き出したダンプファイルをダウンロードするためのリンクは表示されませんので、URLのvsdb以下を左記のパスに書き換えるなど手打ちでダウンロードしてください．ダウンロードにログインは不要です</li>
+    <li><a href="sen_dumpw0.php">DBダンプ出力（sul/dbb_foldr/krssfansite_db_mysql.dumpを書き出します) </a>【注意】ファイル名は固定で毎回上書きされます. 書き出したダンプファイルをダウンロードするためのリンクは表示されませんので、URLのvsdb以下を左記のパスに書き換えるなど手打ちでダウンロードしてください．ダウンロードにログインは不要です</li>
 
     </ul>
     

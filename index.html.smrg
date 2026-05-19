@@ -6,26 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ,user-scalable=yes">
     <meta name="referrer" content="no-referrer">
     <meta name="copyright" content="(c) ASCAMI.kei 2023-2025">
-    <!-- <meta name="keywords" content="V様歌データベース,V様歌リスト,V様歌配信歌データベース" > -->
+    <!-- <meta name="keywords" content="皇黄リリエ歌データベース,皇黄リリエ歌リスト,皇黄リリエ歌配信歌データベース" > -->
     <link rel="stylesheet" href="standardv2.css?9c62729e">
     <link rel="stylesheet" href="top.css?fc9e0a8c">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <title>V様歌リスト〈非公式〉《仮設》</title>
+    <title>皇黄リリエ歌リスト〈非公式〉《仮設》</title>
 </head>
 
 <body>
     <main>
         <div id="container">
             <div id="main" ontouchstart="">
-                <h1>V様歌リスト〈非公式〉《仮設》</h1>
+                <h1>皇黄リリエ歌リスト〈非公式〉《仮設》</h1>
                 <!--
     <div class="attention">2025.7.15〜データベース障害により利用できない場合があります</div>
     -->
 
                 <h2>
-                    V様 ⚜ 歌リスト
+                    皇黄リリエ ⚜ 歌リスト
                 </h2>
                 <div id="navicontainer">
                     <input id="toggle" type="checkbox">
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="textnote_center">
-                    <p><a href="https://www.youtube.com">V様</a>がライブ配信等で歌った歌をまとめている非公式サイトです<br>
+                    <p><a href="https://www.youtube.com/@sumeragi_Lilie">皇黄リリエ</a>がライブ配信等で歌った歌をまとめている非公式サイトです<br>
                         <!--
     曲名順表示のリンクからは採用された配信履歴を表示できます<br>
     配信リストからはセットリスト形式の表示へリンクしています<br>タイムスタンプがある曲は配信アーカイブの場面へリンクしています</p>
