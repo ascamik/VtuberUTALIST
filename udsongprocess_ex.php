@@ -4,14 +4,8 @@ require_once 'Encode.php';
 require_once 'htmlpkg.php';
 require_once 'chckdate.php'; //for check mysql DATE format
 
-// Import the necessary classes
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Illuminate\Database\Capsule\Manager as Capsule;
 
-// Include the composer autoload file
-require 'vendor/autoload.php';
-require_once 'sen_cnfg0001.php';
-// Setup a new Eloquent Capsule instance
+require_once 'dbAu.php';
 
 
 
@@ -21,8 +15,9 @@ putHtmlHeader($title, $h2);
 //putHtmlNavibar('admin');
 //check login admin  
 
-if ($user = Sentinel::check()) {
+if ($auth->isLogged()) {
     // ログインしているアカウントをチェック
+    $user = $auth->getCurrentSessionUserInfo();
     print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
 } else {
     print "<div class=\"normalmessage\">ログインしていません</div>\n\n";
@@ -112,6 +107,7 @@ if ($_POST['sname'] and $_POST['yomi']) {
 
             try {
                 $db = getDb();
+
                 $yomi = mb_convert_kana($_POST['yomi'], 'c'); //Katakana => HIRAGANA convert
 
 

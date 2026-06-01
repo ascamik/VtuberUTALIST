@@ -6,15 +6,8 @@ require_once 'htmlpkg.php';
 require_once 'timestamplinker.php';
 require_once 'tbvInsertDelete.php';
 require_once 'tbsInsertSong.php';
+require_once 'dbAu.php';
 
-// Import the necessary classes
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Illuminate\Database\Capsule\Manager as Capsule;
-
-// Include the composer autoload file
-require 'vendor/autoload.php';
-require_once 'sen_cnfg0001.php';
-// Setup a new Eloquent Capsule instance
 
 
 
@@ -28,8 +21,9 @@ $h2 = "管理（セットリスト修正〈曲の削除・挿入〉）";
 putHtmlHeader($title, $h2);
 //check login admin  
 
-if ($user = Sentinel::check()) {
+if ($auth->isLogged()) {
     // ログインしているアカウントをチェック
+    $user = $auth->getCurrentSessionUserInfo();
     putHtmlNavibar('admin');
     print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
 } else {

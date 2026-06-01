@@ -2,40 +2,30 @@
 
 
 require_once 'htmlpkg.php';
-
-// Import the necessary classes
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Illuminate\Database\Capsule\Manager as Capsule;
-
-// Include the composer autoload file
-require 'vendor/autoload.php';
-
-// Setup a new Eloquent Capsule instance
-require_once 'sen_cnfg0001.php';
+require_once 'dbAu.php';
 
 
-
-$title='管理';
-$h2="管理";
-putHtmlHeader($title,$h2);
+$title = '管理';
+$h2 = "管理";
+putHtmlHeader($title, $h2);
 putHtmltextarea();
+print '<a href="index.html">トップページへ</a><br><br>';
 
+if ($auth->isLogged()) {
 
-if ($user = Sentinel::check()) {
-
-    $re = Sentinel::logout();
+    $hash = $auth->getCurrentSessionHash();
+    $re = $auth->logout($hash);
 
     if ($re) {
         //
-    
-    print'<div>ログアウトしました</div>';
-    }
-    else {
-        print'<div>fail</div>';
+
+        print '<div>ログアウトしました</div>';
+    } else {
+        print '<div>fail</div>';
         // 
     }
-}else{
-    print'<div>ログインしていません</div>';
+} else {
+    print '<div>ログインしていません</div>';
 }
 putHtmltextarea_close();
 putHtmlContainerClose();

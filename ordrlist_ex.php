@@ -3,24 +3,18 @@ require_once 'DbMa.php';
 require_once 'Encode.php';
 require_once 'htmlpkg.php';
 require_once 'chckdate.php';
+require_once 'dbAu.php';
 
 
-// Import the necessary classes
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Illuminate\Database\Capsule\Manager as Capsule;
-
-// Include the composer autoload file
-require 'vendor/autoload.php';
-require_once 'sen_cnfg0001.php';
-// Setup a new Eloquent Capsule instance
 
 $title = '全曲（条件指定）〈管理〉';
 $h2 = "〈管理〉全曲一覧・条件指定表示";
 
 putHtmlHeader($title, $h2);
 
-if ($user = Sentinel::check()) {
+if ($auth->isLogged()) {
     // ログインしているアカウントをチェック
+    $user = $auth->getCurrentSessionUserInfo();
     print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
     $admin = 'admin';
 } else {

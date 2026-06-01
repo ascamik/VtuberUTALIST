@@ -3,17 +3,10 @@ require_once 'DbMa.php';
 require_once 'Encode.php';
 require_once 'htmlpkg.php';
 require_once 'Code2text.php';
+require_once 'dbAu.php';
 //
 // Supports 4-digit EventID
 //
-// Import the necessary classes
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Illuminate\Database\Capsule\Manager as Capsule;
-
-// Include the composer autoload file
-require 'vendor/autoload.php';
-require_once 'sen_cnfg0001.php';
-// Setup a new Eloquent Capsule instance
 
 
 
@@ -24,9 +17,11 @@ $h2 = "管理（イベントデータ修正）";
 putHtmlHeader($title, $h2);
 //check login admin  
 
-if ($user = Sentinel::check()) {
+if ($auth->isLogged()) {
+
     putHtmlNavibar('admin');
     // ログインしているアカウントをチェック
+    $user = $auth->getCurrentSessionUserInfo();
     print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
 } else {
     putHtmlNavibar();

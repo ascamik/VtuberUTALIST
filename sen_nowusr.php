@@ -2,15 +2,8 @@
 
 
 require_once 'htmlpkg.php';
-// Import the necessary classes
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Illuminate\Database\Capsule\Manager as Capsule;
 
-// Include the composer autoload file
-require 'vendor/autoload.php';
-
-// Setup a new Eloquent Capsule instance
-require_once 'sen_cnfg0001.php';
+require_once 'dbAu.php';
 
 
 $loginform = <<<EOD
@@ -41,24 +34,25 @@ putHtmltextarea();
 if (isset($_POST['email']) and isset($_POST['passwd'])) {
 
 
-    $credentials = [
+
+    $email = $_POST['email'];
+    $password = $_POST['passwd'];
 
 
-        'email'    => $_POST['email'],
-        'password' => $_POST['passwd'],
-    ];
-
-    $user = Sentinel::authenticateAndRemember($credentials);
-    if ($user === false) {
+    $result = $auth->login($email, $password, 1); // remember=1
+    if ($result['error']) {
         print '<div>ログイン認証に失敗しました</div>';
     } else {
         print '<div>ログインしました</div>';
+        header("Location: sen_nowusr.php");
     }
 }
 
-if ($user = Sentinel::check()) {
+if ($auth->isLogged()) {
     // ログインしているアカウントをチェック
-    print "<div>アカウント {$user['email']} でログインしています</div>";
+    $return = $auth->getCurrentSessionUserInfo();
+
+    print "<div>アカウント {$return['email']} でログインしています</div>";
     print "<div class=\"normalmessage\">この管理システムは管理者が使うことを想定した仮設のもので入力値のチェックは最低限しかしていません。</div>";
     //メニュー表示
     print "<div class=\"normalmessage\">通常登録作業は(1)→(2) タイムスタンプ等後で(3)修正・追加することができます</div>";
