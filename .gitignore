@@ -1,5 +1,4 @@
 # エディタ/IDE
 .vscode/
 .idea/
-vendor/
 vtullsvpkg.code-workspace

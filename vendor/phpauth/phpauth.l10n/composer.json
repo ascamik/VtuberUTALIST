@@ -1,0 +1,20 @@
+{
+    "name": "phpauth/phpauth.l10n",
+    "description": "PHPAuth Localizations",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Karel Wintersky",
+            "email": "karel.wintersky@yandex.ru"
+        }
+    ],
+    "require": {
+        "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPAuth\\": "sources/"
+        }
+    }
+}
