@@ -10,10 +10,10 @@ $loginform = <<<EOD
 <div id="formcontainer">
     <form method="POST" action="sen_nowusr.php">
         <div  class="formparts_2">
-            <div class="fml"><label class="label">email</label></div><input name="email" id="email" type="email" size="50" maxlength="50"  required>
+            <div class="fml"><label class="label" for="email">email</label></div><input name="email" id="email" type="email"  required>
         </div>
         <div  class="formparts_2">
-        <div class="fml"><label class="label">password</label></div><input name="passwd" id="passwd" type="password" size="50" maxlength="50" required>
+        <div class="fml"><label class="label" for="passwd">password</label></div><input name="passwd" id="passwd" type="password"  required>
         </div>
 
         <div  class="formparts_2">
@@ -53,7 +53,8 @@ if ($auth->isLogged()) {
     $return = $auth->getCurrentSessionUserInfo();
 
     print "<div>アカウント {$return['email']} でログインしています</div>";
-    print "<div class=\"normalmessage\">この管理システムは管理者が使うことを想定した仮設のもので入力値のチェックは最低限しかしていません。</div>";
+    print "<div class=\"normalmessage entrance\"><a href=\"integeditor.php\">統合管理画面はこちら</a></div>";
+    print "<div class=\"normalmessage\">以下のリンクは以前の管理システムです</div>";
     //メニュー表示
     print "<div class=\"normalmessage\">通常登録作業は(1)→(2) タイムスタンプ等後で(3)修正・追加することができます</div>";
     putHtmladminmenu();

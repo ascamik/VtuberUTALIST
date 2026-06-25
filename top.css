@@ -41,7 +41,8 @@ div#main {
   min-height: 80vh;
   /*  min-width:550px; */
   background-color: #FFFFFF;
-  background-image: url("./pcandmic4bg.jpg");
+  /*background-image: url("./pcandmic4bg.jpg");*/
+  /**************トップの背景画像*****************/
   /*   background-image: url("./pexels-tima-miroshnichenko-c2.jpg");*/
   background-repeat: no-repeat;
   background-size: 100% auto;
@@ -114,7 +115,7 @@ div#main {
   vertical-align: middle; */
   font-size: 1em;
   font-weight: 450;
-  background: linear-gradient(#f9e99a, #fff1a9, #f2e49f);
+  background: #f9e99a;
   border-radius: 0.25rem;
 
 }
@@ -143,7 +144,7 @@ div#main {
   vertical-align: middle; */
   font-size: 1em;
   font-weight: 450;
-  background: linear-gradient(#f9e99a, #fff1a9, #fce46d);
+  background: #f9e99a;
   border-radius: 0.25rem;
 }
 
@@ -169,7 +170,7 @@ div#main {
   vertical-align: middle; */
   font-size: 1em;
   font-weight: 450;
-  background: linear-gradient(#f9e99a, #fff1a9, #f2e49f);
+  background: #f9e99a;
   border-radius: 0.25rem;
   width: 198px;
 }
@@ -187,11 +188,11 @@ div#main {
 
 
 .pd_navi_link:hover {
-  background: linear-gradient(#e9cf4c, #fff1a9, #f0d23f);
+  background: #fff1a9;
 }
 
 .v_navi_link:hover {
-  background: linear-gradient(#e9cf4c, #fff1a9, #f0d23f);
+  background: #fff1a9;
 }
 
 

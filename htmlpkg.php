@@ -1,19 +1,20 @@
 <?php
 require_once 'Encode.php';
 
-function putHtmlHeader ($title,$h2, $csslk=''){
-//html escape
-$t=e($title);
-$h2e=e($h2);
+function putHtmlHeader($title, $h2, $csslk = '')
+{
+    //html escape
+    $t = e($title);
+    $h2e = e($h2);
 
-$source = <<<EOD
+    $source = <<<EOD
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ,user-scalable=yes" >
     <meta name="referrer" content="no-referrer">
-    <meta name="copyright" content="(c) ASCAMI.kei 2023-2025">
+    <meta name="copyright" content="(c) ASCAMI.kei 2023-2026">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -33,11 +34,12 @@ $source = <<<EOD
 <h2>$h2e</h2>
 EOD;
 
-print $source;
+    print $source;
 }
 
-function putHtmlContainerClose($jscript=''){
-$source= <<<EOD
+function putHtmlContainerClose($jscript = '')
+{
+    $source = <<<EOD
 </div>
 </div>
 </main>
@@ -62,22 +64,23 @@ $jscript
 </html>
 EOD;
 
-print $source;
-
+    print $source;
 }
 
-function putHtmltextarea(){
-    $source= <<<EOD
+function putHtmltextarea()
+{
+    $source = <<<EOD
     <div class="normalmessage">
 EOD;
-print $source;
+    print $source;
 }
 
-function putHtmltextarea_close(){
-    $source= <<<EOD
+function putHtmltextarea_close()
+{
+    $source = <<<EOD
     </div><!-- textarea close -->
 EOD;
-print $source;
+    print $source;
 }
 
 
@@ -85,13 +88,14 @@ print $source;
 
 
 
-function putHtmlNavibar($p = ""){
-$exmenu='';
-if($p=="admin"){
-    $exmenu='<div class="navi_group_dummy_ad"><div class="navi_link_ad"><a href="sen_nowusr.php">管理</a></div></div>';
-}
+function putHtmlNavibar($p = "")
+{
+    $exmenu = '';
+    if ($p == "admin") {
+        $exmenu = '<div class="navi_group_dummy_ad"><div class="navi_link_ad"><a href="sen_nowusr.php">管理</a></div></div>';
+    }
 
-$source= <<<EOD
+    $source = <<<EOD
 <div id="navicontainer">
 <input id="toggle" type="checkbox">
 <div class="navi_group_dummy">
@@ -100,9 +104,9 @@ $source= <<<EOD
 </div>
 <div class="navi_group_dummy">
 
-<div class="navi_link_home"><a href="./"><img
-                                    src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg" id="fleurDeLis"><!-- <img
-                                    src="home_24dp_2C54B7_FILL0_wght400_GRAD0_opsz24.svg" id="fleurDeLis"> --></a></div>
+<div class="navi_link_home"><a href="./"><!--<img
+                                    src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg" id="fleurDeLis">--><img
+                                    src="home_24dp_2C54B7_FILL0_wght400_GRAD0_opsz24.svg" id="fleurDeLis"></a></div>
 </div>
 <div class="navi_group">
 <div class="navi_link"><a href="slistk.php?i=1">数字／英字</a></div>
@@ -130,15 +134,16 @@ $source= <<<EOD
 </div>
 EOD;
 
-print $source;
+    print $source;
 }
 
-function putHtmlText ($text){
+function putHtmlText($text)
+{
     //html escape
-    $t=e($text);
+    $t = e($text);
 
-    $tbr=nl2br($t, false);
-    
+    $tbr = nl2br($t, false);
+
     $source = <<<EOD
 
     <div class="textnote">
@@ -152,8 +157,9 @@ function putHtmlText ($text){
 
 
 
-function putHtmladminmenu(){
-    $source= <<<EOD
+function putHtmladminmenu()
+{
+    $source = <<<EOD
     <div class="normalmessage">
     <ul class="m">
     <li><a href="index.html">トップページ</a></li>
@@ -166,20 +172,20 @@ function putHtmladminmenu(){
     <li><a href="searchsong.php">曲の検索（リストに出ない曲（歌っていない曲）も対象）</a></li>
 <li><a href="ordrlist_ex.php">全曲一覧（曲管理リンク付き）</a></li>
    <li>*</li>
-    <li><a href="sen_dumpw0.php">DBダンプ出力（.../dbb_foldr/krssfansite_db_mysql.dumpを書き出します) </a>【注意】ファイル名は固定で毎回上書きされます. 書き出したダンプファイルをダウンロードするためのリンクは表示されませんので、URLのvsdb以下を左記のパスに書き換えるなど手打ちでダウンロードしてください．ダウンロードにログインは不要です</li>
+    <li><a href="sen_dumpw0.php">DBダンプ出力（.../dbb_foldr/archive_db_mysql.dumpを書き出します) </a>【注意】ファイル名は固定で毎回上書きされます. 書き出したダンプファイルをダウンロードするためのリンクは表示されませんので、URLのvsdb以下を左記のパスに書き換えるなど手打ちでダウンロードしてください．ダウンロードにログインは不要です</li>
 
     </ul>
     
     
     </div>
 EOD;
-print $source;
+    print $source;
 }
 
-function putHtmlH3($text){
-    $source= <<<EOD
+function putHtmlH3($text)
+{
+    $source = <<<EOD
     <h3 class="sectiontitle">{$text}</h3>
 EOD;
-print $source;
+    print $source;
 }
-

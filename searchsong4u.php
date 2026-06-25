@@ -45,18 +45,18 @@ putHtmlNavibar();
 $keyword = isset($_POST['keyword']) ? $_POST['keyword'] : '';
 $target = isset($_POST['target']) ? $_POST['target'] : 'songtitle';
 
-putHtmltext('※試験実装中です  検索に問題がある場合（あるはずが表示されない、間違った結果が表示される等）はお知らせいただければありがたいです');
+//putHtmltext('※試験実装中です  検索に問題がある場合（あるはずが表示されない、間違った結果が表示される等）はお知らせいただければありがたいです');
 
 ?>
 
 <div id="formcontainer">
     <form method="POST" action="searchsong4u.php">
-        <div class=formparts_2>
+        <div class="formparts_2">
             <div class="fml">
                 <label class="label">検索する項目</label>
-                <input type="radio" name="target" value="songtitle" <?= $target == 'songtitle' ? 'checked' : '' ?>><label>曲名・よみ</label>
-                <input type="radio" name="target" value="artistandp" <?= $target == 'artistandp' ? 'checked' : '' ?>><label>アーティスト・ボカロP</label>
-                <input type="radio" name="target" value="anime" <?= $target == 'anime' ? 'checked' : '' ?>><label>タイアップアニメ作品</label>
+                <input class="searchradio" id="radio_s" type="radio" name="target" value="songtitle" <?= $target == 'songtitle' ? 'checked' : '' ?>><label for="radio_s">曲名・よみ</label>
+                <input class="searchradio" id="radio_a" type="radio" name="target" value="artistandp" <?= $target == 'artistandp' ? 'checked' : '' ?>><label for="radio_a">アーティスト・ボカロP</label>
+                <input class="searchradio" id="radio_t" type="radio" name="target" value="anime" <?= $target == 'anime' ? 'checked' : '' ?>><label for="radio_t">タイアップアニメ作品</label>
             </div>
         </div>
         <div class="formparts_2">

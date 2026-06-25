@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost
--- 生成日時: 2026 年 6 月 23 日 14:38
--- サーバのバージョン： 11.8.5-MariaDB-log
--- PHP のバージョン: 8.3.29
+-- 生成日時: 2025 年 7 月 08 日 11:08
+-- サーバのバージョン： 10.11.11-MariaDB-log
+-- PHP のバージョン: 8.2.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -70,23 +70,6 @@ CREATE TABLE `tbvocal` (
   `memo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- --------------------------------------------------------
-
---
--- テーブルの構造 `tbvodraft`
---
-
-CREATE TABLE `tbvodraft` (
-  `drafttype` varchar(4) NOT NULL,
-  `evwcode` varchar(8) NOT NULL,
-  `seqnum` int(11) NOT NULL,
-  `songid` int(11) DEFAULT NULL,
-  `arrng` int(11) DEFAULT NULL,
-  `time` varchar(8) DEFAULT NULL,
-  `memo` varchar(255) DEFAULT NULL,
-  `comment` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
 --
 -- ダンプしたテーブルのインデックス
 --
@@ -95,8 +78,7 @@ CREATE TABLE `tbvodraft` (
 -- テーブルのインデックス `tbevent`
 --
 ALTER TABLE `tbevent`
-  ADD PRIMARY KEY (`evwcode`),
-  ADD KEY `evwcode` (`evwcode`);
+  ADD PRIMARY KEY (`evwcode`);
 
 --
 -- テーブルのインデックス `tbsong`
@@ -110,12 +92,6 @@ ALTER TABLE `tbsong`
 --
 ALTER TABLE `tbvocal`
   ADD PRIMARY KEY (`evwcode`,`seqnum`);
-
---
--- テーブルのインデックス `tbvodraft`
---
-ALTER TABLE `tbvodraft`
-  ADD PRIMARY KEY (`drafttype`,`evwcode`,`seqnum`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

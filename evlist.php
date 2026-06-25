@@ -1,5 +1,5 @@
 <?php
-//このスクリプトでは設定の保存にcookieを使用しています。アップロード時に
+//このスクリプトではcookieを使用しています。アップロード時に
 //  document.cookie = `${name}=${value}; path=/; max-age=${maxAge}`;
 //の行のpath属性に、このファイルが置かれているあなたのサーバのサブディレクトリを設定してください
 //また、レンタルサーバのドメインを使う共有サーバ等ではDomain属性にサブドメインを含むドメイン属性を設定してください
@@ -174,7 +174,7 @@ function getCookie(name) {
 }
 function setCookie(name, value, days = 370) {
   const maxAge = days * 24 * 60 * 60;
-  document.cookie = `${name}=${value}; path=/sul; Domain=krssfansite.lsv.jp; max-age=${maxAge}`;
+  document.cookie = `${name}=${value}; path=/; max-age=${maxAge}`;
 }
 
 // --- 設定保存 ---

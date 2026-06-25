@@ -1,0 +1,665 @@
+.editorcontainer {
+    display: flex;
+    /* 子要素を横並びにする */
+    justify-content: space-between;
+    /* 要素間のスペースを均等にする */
+}
+
+.leftpane {
+    width: 36%;
+}
+
+.centerpane {
+    width: 40%;
+}
+
+
+.rightpane {
+    width: 23%;
+}
+
+.songlistcontainer {
+    height: 75.5svh;
+    /* 縦サイズの固定値 */
+    overflow-y: scroll;
+    margin: 0px;
+
+}
+
+
+.leftpane {
+    /*  width: 32%;*/
+    /* 3つ並べるための幅（隙間を考慮して32〜33%が目安） */
+    background-color: #f0f0f0;
+    padding: 5px 3px 0px 3px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    /* パディングを含めて幅を計算させる */
+
+}
+
+.centerpane,
+.rightpane {
+    /*  width: 32%;*/
+    /* 3つ並べるための幅（隙間を考慮して32〜33%が目安） */
+    background-color: #f0f0f0;
+    padding: 5px 10px 20px 10px;
+    box-sizing: border-box;
+    /* パディングを含めて幅を計算させる */
+    height: 80svh;
+    /* 縦サイズの固定値 */
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+.integnavi_group>div.navi_link {
+    display: inline;
+    background-color: #e0eafa
+}
+
+.integnavi_link {
+    white-space: nowrap;
+    padding: 2px 3px;
+    margin: 1px 3px;
+    border-style: none;
+    border-width: 1px 1px;
+    border-color: #03294a6b;
+    /*   display: inline;
+    vertical-align: middle; */
+    font-size: 1.1em;
+    font-weight: 450;
+    background: #dee8f7;
+    border-radius: 0.25rem;
+    min-width: 25px;
+    overflow: hidden;
+    text-align: center;
+
+
+    /* background-color: #fffd85; */
+}
+
+div.integnavi_link a {
+    display: block;
+}
+
+div.integnavi_link:hover {
+    background: #f6f9ff;
+}
+
+.integnavi_group {
+    display: flex;
+    /* justify-content: space-evenly; */
+    background-color: #79aafa;
+    padding: 5px;
+    border-radius: 5px 5px 0px 0px;
+    /* position: sticky;
+    top: 0px; */
+    margin: 0 0 0 1px;
+}
+
+.stickynavi {
+    position: sticky;
+    top: 0px;
+    background-color: #ffffffc0;
+    display: flex;
+}
+
+.leftpane .stickynavi {
+    position: static;
+    /* top: 2rem; */
+    background-color: #ffffffc0;
+    display: flex;
+}
+
+.navi {
+    /* position: sticky; */
+    /* top: 0px; */
+    background-color: #ffffffc0;
+    display: flex;
+}
+
+
+
+#evwcodeMemory {
+    background-color: #ffffffc0;
+    margin: 2px 10px;
+
+}
+
+.editorcontainer button {
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+
+    padding: 10px 20px;
+    height: fit-content;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+    transition: background 0.15s;
+}
+
+
+
+button.appendSLBtn {
+    margin: 0px;
+    padding: 5px 7px;
+    line-height: 1.3rem;
+    align-items: center;
+}
+
+button.appendSLBtn:hover {
+    background-color: #bdcbd8;
+}
+
+.guidance {
+    margin: 3px;
+
+
+    padding: 3px 20px;
+
+    font-size: 0.95rem;
+    border: solid #cfb129;
+    border-width: 0px 0px 0px 3px;
+}
+
+.guidance_r {
+    margin: 3px;
+
+
+    padding: 3px 20px;
+
+    font-size: 0.95rem;
+    border: solid #cfb129;
+    border-width: 0px 0px 0px 0px;
+}
+
+.alert {
+    color: #a34808
+}
+
+#submitbutton>input {
+    background: #4285f4;
+    color: white;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+
+    padding: 10px 20px;
+    height: fit-content;
+    font-size: 0.95rem;
+    cursor: pointer;
+    width: fit-content;
+}
+
+#submitbutton>input:hover {
+    background: #2f73e6;
+}
+
+.modal-desc {
+    margin: 10px 0px;
+    color: #be6704;
+    background-color: ghostwhite;
+    font-size: 1em;
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: #c77100 1px solid;
+}
+
+.modal-btnlike {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.modal-btnlike>a>div {
+    color: #FFF;
+    background-color: #79aafa;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 24px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+
+    padding: 10px 20px;
+    height: fit-content;
+    font-size: 0.95rem;
+
+
+}
+
+.modal-btnlike>a>div:hover {
+    background-color: #4285f4;
+}
+
+
+
+#runEraseSLBtn,
+#eraseSLBtn {
+    background: #f1e4c6;
+    color: #000000;
+}
+
+#runEraseSLBtn:hover,
+#eraseSLBtn:hover {
+    background: #ffa600;
+    color: #ffffff;
+}
+
+#purgeBtn {
+    background: #4285f4;
+    color: white;
+}
+
+#purgeBtn:hover {
+    background: #2f73e6;
+}
+
+#newSongBtn {
+    background: #4285f4;
+    color: white;
+}
+
+#newSongBtn:hover {
+    background: #2f73e6;
+}
+
+/*イベントペイン*/
+.event-row {
+    cursor: pointer;
+}
+
+.event-row:hover td {
+    background: #f5f8fc;
+}
+
+
+
+/* Event modal */
+
+#newEventBtn {
+    background: #4285f4;
+    color: white;
+}
+
+#newEventBtn:hover {
+    background: #2f73e6;
+}
+
+/* モーダル本体 */
+dialog#eventDialog {
+    width: min(800px, 90vw);
+    max-height: 90vh;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+
+/* 背景 */
+dialog#eventDialog::backdrop {
+    background: rgba(0, 0, 0, .4);
+}
+
+/* フォーム全体 */
+#eventForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+}
+
+/* ラベル */
+#eventForm label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: -6px;
+}
+
+dialog form {
+    background-color: #FFFFFF;
+}
+
+/* 入力欄 */
+#eventForm input,
+#eventForm textarea,
+#eventForm select {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 8px 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-size: 14px;
+}
+
+/* フォーカス */
+#eventForm input:focus,
+#eventForm textarea:focus,
+#eventForm select:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+/* 説明欄 */
+#evdesc {
+    min-height: 180px;
+    resize: vertical;
+}
+
+/* コード欄 */
+#evwcode {
+    width: 120px;
+}
+
+/* ボタン行 */
+.dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+/* ボタン共通 */
+.dialog-buttons button {
+    min-width: 90px;
+    padding: 8px 16px;
+
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 保存 */
+#saveEvBtn {
+    background: #2f80ed;
+    color: white;
+}
+
+/* 削除 */
+#deleteEvBtn {
+    background: #f1e4c6;
+    ;
+    color: #000000;
+}
+
+/* 閉じる */
+#closeEvBtn {
+    background: #6c757d;
+    color: white;
+}
+
+/* ホバー */
+#saveEvBtn:hover {
+    opacity: 0.9;
+}
+
+#deleteEvBtn:hover {
+    opacity: 0.9;
+    background-color: #ffa600;
+    color: #FFFFFF;
+}
+
+#closeEvBtn:hover {
+    opacity: 0.9;
+}
+
+/* ここまでeventModal */
+
+/*歌リストペイン*/
+.song-row {
+    cursor: pointer;
+}
+
+/* SongModal */
+/* モーダル本体 */
+dialog#songDialog {
+    width: min(800px, 90vw);
+    max-height: 90vh;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+
+/* 背景 */
+dialog#songDialog::backdrop {
+    background: rgba(0, 0, 0, .4);
+}
+
+/* フォーム全体 */
+#songForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+}
+
+/* ラベル */
+#songForm label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: -6px;
+}
+
+dialog form {
+    background-color: #FFFFFF;
+}
+
+/* 入力欄 */
+#songForm input,
+#songForm textarea,
+#songForm select {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 8px 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-size: 14px;
+}
+
+/* フォーカス */
+#songForm input:focus,
+#songForm textarea:focus,
+#songForm select:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+/* 説明欄 */
+#evdesc {
+    min-height: 180px;
+    resize: vertical;
+}
+
+/* コード欄 */
+#evwcode {
+    width: 120px;
+}
+
+/* ボタン行 */
+.dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+/* ボタン共通 */
+.dialog-buttons button {
+    min-width: 90px;
+    padding: 8px 16px;
+
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 保存 */
+#saveSongBtn {
+    background: #2f80ed;
+    color: white;
+}
+
+/* 削除 */
+#deleteSongBtn {
+    background: #f1e4c6;
+    ;
+    color: #000000;
+}
+
+/* 閉じる */
+#closeSongBtn {
+    background: #6c757d;
+    color: white;
+}
+
+/* ホバー */
+#saveEvBtn:hover {
+    opacity: 0.9;
+}
+
+#deleteSongBtn:hover {
+    opacity: 0.9;
+    background-color: #ffa600;
+    color: #FFFFFF;
+}
+
+#closeSongBtn:hover {
+    opacity: 0.9;
+}
+
+
+
+div#container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0px auto;
+    background-color: #FFFFFF;
+
+
+}
+
+
+
+
+
+
+
+
+div#footer {
+    max-width: 100%;
+    /* min-width: 540px;*/
+    margin: 0 0px;
+    padding: 5px 20px;
+    background-color: #FFFFFF;
+
+
+}
+
+div#copyright {
+    max-width: 100%;
+    /* min-width: 540px;*/
+    margin: 0 0px;
+    padding: 5px 20px;
+    color: #fcf3f3;
+    background-color: #FFFFFF;
+    text-align: center !important;
+
+}
+
+footer {
+
+    /*  background-color: #FFFFFF; */
+
+    max-width: 100%;
+    min-width: 300px;
+    margin: 0px auto;
+    /*  padding:5px 20px; */
+    text-align: right;
+}
+
+/* タブはPCでは非表示 */
+.pane-tabs {
+    display: none;
+}
+
+
+
+
+
+/* スマホ表示 */
+@media (max-width: 1500px) {
+
+    .pane-tabs {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 8px;
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background: #eee;
+        cursor: pointer;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .tab-btn.active {
+        background: #4a90e2;
+        color: white;
+    }
+
+    .editorcontainer {
+
+        display: block;
+    }
+
+    .leftpane,
+    .centerpane,
+    .rightpane {
+        width: 100%;
+        height: calc(100vh - 120px);
+        display: none;
+    }
+
+    .leftpane.active,
+    .centerpane.active,
+    .rightpane.active {
+        display: block;
+    }
+
+    div#container {
+
+        max-width: 980px;
+
+
+
+    }
+
+    footer {
+
+        /*  background-color: #FFFFFF; */
+
+        max-width: 980px;
+    }
+
+}
+
+
+
+
+/* less than 900px*/
