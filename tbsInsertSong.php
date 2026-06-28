@@ -2,12 +2,14 @@
 
 require_once 'DbMa.php';
 require_once 'chckdate.php';
+require_once 'Code2text.php';
 
 // this function is to insert new song record  to database 'tbsong'
 
 function insertSongtbs(string  $sname, string  $yomi, string $genre, string $orgsongid = '0', string  $artist = '', string  $tieup = '', string  $vocap = '', string $relsd = ''): array
 {
-    if ($sname == "" or $yomi == "" or !(preg_match('/^[PAVGoIR]$/', $genre))) { //check parameter data
+    global $genreCodeMx;
+    if ($sname == "" or $yomi == "" or !(array_key_exists($genre, $genreCodeMx))) { //check parameter data
         return array('err' => 8, 'songid' => 0, 'arrng' => 0);
     }
     if (preg_match('/^\d+$/', $orgsongid) and intval($orgsongid) > 0) { //if new song is arranged version song

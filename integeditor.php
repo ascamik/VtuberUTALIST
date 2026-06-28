@@ -140,15 +140,11 @@ print '</div>'; //editorcontainer close
         <div class="form-row">
             <label for="fieldNS8">ジャンル</label>
             <select id="fieldNS8" name="genre">
-                <option value="P">P:J-POP</option>
-                <option value="A">A:Animation song</option>
-                <option value="V">V:Vocalo song</option>
-                <option value="G">G:Game song</option>
-                <option value="o">o:Original song</option>
-                <option value="I">I:for The Idolmaster </option>
-                <option value="R">R:Rock</option>
 
-                <option></option>
+                <?php foreach ($genreCodeMx as $code => $codecaption) {
+                    print "<option value=\"{$code}\">{$code}:{$codecaption}</option>\n";
+                }
+                ?>
             </select>
         </div>
 
@@ -300,13 +296,11 @@ print '</div>'; //editorcontainer close
         <label for="genre">ジャンル</label>
 
         <select id="genre" name="genre">
-            <option value="P">P:J-POP</option>
-            <option value="A">A:Animation song</option>
-            <option value="V">V:Vocalo song</option>
-            <option value="G">G:Game song</option>
-            <option value="o">o:Original song</option>
-            <option value="I">I:for The Idolmaster </option>
-            <option value="R">R:Rock</option>
+            <?php foreach ($genreCodeMx as $code => $codecaption) {
+                print "<option value=\"{$code}\">{$code}:{$codecaption}</option>\n";
+            }
+            ?>
+
 
         </select>
 

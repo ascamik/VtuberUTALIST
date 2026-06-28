@@ -9,6 +9,7 @@ require_once 'htmlpkg.php';
 require_once 'tbsInsertSong.php';
 
 require_once 'dbAu.php';
+require_once 'Code2text.php';
 
 // check login account
 
@@ -36,7 +37,7 @@ $sname = isset($_POST['sname']) ? $_POST['sname'] : '';
 $yomi = isset($_POST['yomi']) ? $_POST['yomi'] : '';
 $genre = isset($_POST['genre']) ? $_POST['genre'] : '';
 
-if ($sname and $yomi and (preg_match('/^[PAVGoIR]$/', $genre))) {
+if ($sname and $yomi and (array_key_exists($genre, $genreCodeMx))) {
 
     $orgsongid = isset($_POST['orgsongid']) ? $_POST['orgsongid'] : '';
     $artist = isset($_POST['artist']) ? $_POST['artist'] : '';
@@ -49,8 +50,8 @@ if ($sname and $yomi and (preg_match('/^[PAVGoIR]$/', $genre))) {
     $songid = $ret_status['songid'];
     $arrng = $ret_status['arrng'];
     if ($ret_status['err'] > 1) { //$songid is set 0 for use next process
-                                      //preprocess function error
-                                      //
+        //preprocess function error
+        //
         $message = "登録ができませんでした[{$ret_status['err']}";
     } elseif ($ret_status['err'] == 1) {
         $message = "同じ曲が[{$songid}-{$arrng}]で既に登録されています（リミックス等は「〇〇リミックス」と付加するなど、タイトルを変えてください）";
@@ -67,7 +68,6 @@ if ($sname and $yomi and (preg_match('/^[PAVGoIR]$/', $genre))) {
         'message' => $message,
     ]);
     exit;
-
 }
 
 header('Content-Type: application/json; charset=utf-8');

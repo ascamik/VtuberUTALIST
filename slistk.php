@@ -2,7 +2,7 @@
 //require_once 'DbMa.php';
 require_once 'Encode.php';
 require_once 'htmlpkg.php';
-require_once 'OrdrSubN.php';
+require_once 'OrdrSubNcsv.php';
 //   require_once 'Relsd2cssclass.php';
 
 $icode2sortby = [

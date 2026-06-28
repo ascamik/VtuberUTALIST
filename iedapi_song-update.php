@@ -5,6 +5,7 @@ require_once 'DbMa.php';
 //require_once 'timestamplinker.php';
 require_once 'chckdate.php';
 require_once 'dbAu.php';
+require_once 'Code2text.php';
 
 if ($auth->isLogged()) {
     // ログインしているアカウントをチェック
@@ -23,7 +24,7 @@ $genre = $_POST['genre'] ?? '';
 $songid = $_POST['songid'] ?? '';
 $arrng = $_POST['arrng'] ?? '';
 $checkSongExists = False;
-if ($_POST['sname'] and $_POST['yomi'] and (preg_match('/^[PAVGoIR]$/', $genre))) {
+if ($_POST['sname'] and $_POST['yomi'] and (array_key_exists($genre, $genreCodeMx))) {
     if (preg_match('/^\d+$/', $songid)) {        //if arranged song
         if (preg_match('/^\d+$/', $arrng, $match)) { // arrng==number
             $arrng = $match[0];

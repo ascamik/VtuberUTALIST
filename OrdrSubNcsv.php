@@ -4,6 +4,7 @@ require_once 'Encode.php';
 require_once 'htmlpkg.php';
 require_once 'chckdate.php';
 require_once 'Relsd2cssclass.php';
+require_once 'Code2text.php';
 ?>
 <?php
 //link to search page
@@ -25,8 +26,9 @@ function ece($source)
 {
     return str_replace([','], ['，'], e($source));
 }
-
-$gname = ['A' => 'アニメ', 'G' => 'ゲーム', 'I' => 'アイマス', 'P' => 'JPOP', 'R' => 'Rock', 'V' => 'ボカロ', 'o' => 'オリ曲',];
+global $genreCodeMxJP;
+$gname = $genreCodeMxJP;
+//$gname = ['A' => 'アニメ', 'G' => 'ゲーム', 'I' => 'アイマス', 'P' => 'JPOP', 'R' => 'Rock', 'V' => 'ボカロ', 'o' => 'オリ曲',];
 
 function putHtmlOrdrTable($order, $on_genre, $limit, $nomedia = '',  $having = '', $mode = '')
 {

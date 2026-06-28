@@ -6,7 +6,7 @@ require_once 'htmlpkg.php';
 require_once 'timestamplinker.php';
 
 require_once 'tbsInsertSong.php';
-
+require_once 'Code2text.php';
 require_once 'dbAu.php';
 
 // check login account
@@ -37,7 +37,7 @@ if (isset($_POST['nssw'])) {
         $yomi = isset($_POST['yomi']) ? $_POST['yomi'] : '';
         $genre = isset($_POST['genre']) ? $_POST['genre'] : '';
 
-        if ($sname and $yomi and (preg_match('/^[PAVGoIR]$/', $genre))) {
+        if ($sname and $yomi and (array_key_exists($genre, $genreCodeMx))) {
 
             $orgsongid = isset($_POST['orgsongid']) ? $_POST['orgsongid'] : '';
             $artist = isset($_POST['artist']) ? $_POST['artist'] : '';
