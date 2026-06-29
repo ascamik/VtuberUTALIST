@@ -57,87 +57,86 @@ $action = $_POST['action'] ?? '';
 
 switch ($action) {
 
-// case 'edit':
+    // case 'edit':
 
-//     This process in the default process :-p
+    //     This process in the default process :-p
 
-//     // UPDATE
+    //     // UPDATE
 
-//     break;
+    //     break;
 
-case 'delete':
+    case 'delete':
 
-    // DELETE
-    $resp = draftdbRowEditor($mode, $evwcode, $seqnum, 'DEL');
-    $res = $resp[0];
-    $errcode = $resp[1];
-    break;
+        // DELETE
+        $resp = draftdbRowEditor($mode, $evwcode, $seqnum, 'DEL');
+        $res = $resp[0];
+        $errcode = $resp[1];
+        break;
 
-case 'move_up':
-    // 上と入れ替え
-    $resp = draftdbRowEditor($mode, $evwcode, $seqnum, 'MVUP');
-    $res = $resp[0];
-    $errcode = $resp[1];
-    break;
+    case 'move_up':
+        // 上と入れ替え
+        $resp = draftdbRowEditor($mode, $evwcode, $seqnum, 'MVUP');
+        $res = $resp[0];
+        $errcode = $resp[1];
+        break;
 
-case 'move_down':
-    // 下と入れ替え
-    $resp = draftdbRowEditor($mode, $evwcode, $seqnum, 'MVDOWN');
-    $res = $resp[0];
-    $errcode = $resp[1];
+    case 'move_down':
+        // 下と入れ替え
+        $resp = draftdbRowEditor($mode, $evwcode, $seqnum, 'MVDOWN');
+        $res = $resp[0];
+        $errcode = $resp[1];
 
-    break;
+        break;
 
-default:
+    default:
 
-// default process  :append a song at last of  the list, change  the data that is time or memo in the row
-    if ($songid > 0) {
-        try {
-            $db = getDb();
-            // check songid
-            $s = $db->query("select songid from tbsong where songid=\"{$songid}\" and arrng=\"{$arrng}\";");
-            $returnsongid = $s->fetchAll(PDO::FETCH_COLUMN);
-            if ($returnsongid[0]) {
-                                    //print "songid ok";
-                if ($seqnum == 0) { // true => append mode
+        // default process  :append a song at last of  the list, change  the data that is time or memo in the row
+        if ($songid > 0) {
+            try {
+                $db = getDb();
+                // check songid
+                $s = $db->query("select songid from tbsong where songid=\"{$songid}\" and arrng=\"{$arrng}\";");
+                $returnsongid = $s->fetchAll(PDO::FETCH_COLUMN);
+                if ($returnsongid[0]) {
+                    //print "songid ok";
+                    if ($seqnum == 0) { // true => append mode
 
-                    $s = $db->query("select max(seqnum) from tbvodraft where drafttype=\"{$mode}\";");
-                                                                     //   $s = $db->query("select max(seqnum) from tbvodraft where drafttype=\"D\" and evwcode=\"tmp\";");
-                    $returnseqnum = $s->fetchAll(PDO::FETCH_COLUMN); //max setlist number or null string
-                    if ($returnseqnum[0] > 0) {
-                        $nextseqnum = strval(intval($returnseqnum[0]) + 1);
-                    } else {
-                        $nextseqnum = 1;
+                        $s = $db->query("select max(seqnum) from tbvodraft where drafttype=\"{$mode}\";");
+                        //   $s = $db->query("select max(seqnum) from tbvodraft where drafttype=\"D\" and evwcode=\"tmp\";");
+                        $returnseqnum = $s->fetchAll(PDO::FETCH_COLUMN); //max setlist number or null string
+                        if ($returnseqnum[0] > 0) {
+                            $nextseqnum = strval(intval($returnseqnum[0]) + 1);
+                        } else {
+                            $nextseqnum = 1;
+                        }
+                        $seqnum = $nextseqnum;
                     }
-                    $seqnum = $nextseqnum;
+                    //               $evwcode = $_POST['evwcode'] ?? '';
+                    if ((preg_match("/^(\d{0,2}?:{0,1}\d{1,2}:\d\d)\s*$/", $time, $m))) {
+                        $ntime = $m[1]; //$_POST['time'];
+                    } else {
+                        $ntime = "";
+                    }
+                    $s = $db->prepare('INSERT INTO tbvodraft (drafttype, evwcode, seqnum, songid, arrng, time, memo, comment) VALUES(:drafttype, :evwcode, :seqnum, :songid, :arrng, :time, :memo, :comment) ON DUPLICATE KEY UPDATE songid=VALUES(songid), arrng=VALUES(arrng), time=VALUES(time),memo=VALUES(memo),comment=VALUES(comment) ');
+                    $s->bindValue(':drafttype', $drafttype);
+                    $s->bindValue(':evwcode', $evwcode);
+                    $s->bindValue(':seqnum', $seqnum);
+                    $s->bindValue(':songid', $songid);
+                    $s->bindValue(':arrng', $arrng);
+                    $s->bindValue(':time', $ntime);
+                    $s->bindValue(':memo', $memo);
+                    $s->bindValue(':comment', $comment);
+
+                    $s->execute();
+
+                    $res = 1; //success
+
                 }
-                //               $evwcode = $_POST['evwcode'] ?? '';
-                if ((preg_match("/^(\d{0,2}?:{0,1}\d{1,2}:\d\d)\s*$/", $time, $m))) {
-                    $ntime = $m[1]; //$_POST['time'];
-                } else {
-                    $ntime = "";
-                }
-                $s = $db->prepare('INSERT INTO tbvodraft (drafttype, evwcode, seqnum, songid, arrng, time, memo, comment) VALUES(:drafttype, :evwcode, :seqnum, :songid, :arrng, :time, :memo, :comment) ON DUPLICATE KEY UPDATE songid=VALUES(songid), arrng=VALUES(arrng), time=VALUES(time),memo=VALUES(memo),comment=VALUES(comment) ');
-                $s->bindValue(':drafttype', $drafttype);
-                $s->bindValue(':evwcode', $evwcode);
-                $s->bindValue(':seqnum', $seqnum);
-                $s->bindValue(':songid', $songid);
-                $s->bindValue(':arrng', $arrng);
-                $s->bindValue(':time', $ntime);
-                $s->bindValue(':memo', $memo);
-                $s->bindValue(':comment', $comment);
-
-                $s->execute();
-
-                $res = 1; //success
-
+                $errcode = 'IDの曲が見つかりません';
+            } catch (PDOException $e) {
+                die("Error:{$e->getMessage()}");
             }
-            $errcode = 'IDの曲が見つかりません';
-        } catch (PDOException $e) {
-            die("Error:{$e->getMessage()}");
         }
-
-    }
 }
 if ($updatemode) { //for Ajax response
     if ($res) {
@@ -147,7 +146,7 @@ if ($updatemode) { //for Ajax response
             'success' => true,
         ]);
     } else {
-// response NG
+        // response NG
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode([
             'success' => false,
@@ -155,7 +154,7 @@ if ($updatemode) { //for Ajax response
         ]);
     }
 } else {
-//print 'done';
-//normal response
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/integeditor.php');
+    //print 'done';
+    //normal response
+    header('Location: ./integeditor.php');
 }

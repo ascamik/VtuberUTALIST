@@ -26,11 +26,7 @@ try {
 
     $s = $db->query("DELETE FROM tbvodraft WHERE drafttype IN ('D' ,'E')");
     print 'done ,delete draft data';
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/integeditor.php');
-
-
-
-
+    header('Location: ./integeditor.php');
 } catch (PDOException $e) {
     die("Error:{$e->getMessage()}");
 }

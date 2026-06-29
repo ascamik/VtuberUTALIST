@@ -36,11 +36,9 @@ if ($evwcode == '') {
         $s = $db->prepare("DELETE FROM tbvocal WHERE evwcode=:evwcode");
         $s->bindValue(':evwcode', $evwcode);
         $s->execute();
-
     } catch (PDOException $e) {
         die("Error:{$e->getMessage()}");
     }
-
 }
 try {
     $db = getDb();
@@ -76,16 +74,8 @@ try {
     if ($res) {
         $s = $db->query("DELETE FROM tbvodraft WHERE drafttype ='{$mode}'");
         print 'done ,delete draft data';
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/integeditor.php');
+        header('Location: ./integeditor.php');
     }
-
-
 } catch (PDOException $e) {
     die("Error:{$e->getMessage()}");
 }
-
-
-
-
-
-

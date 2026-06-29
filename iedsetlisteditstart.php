@@ -1,17 +1,17 @@
 <?php
-    require_once 'DbMa.php';
-    require_once 'Encode.php';
-    require_once 'htmlpkg.php';
-    require_once 'timestamplinker.php';
+require_once 'DbMa.php';
+require_once 'Encode.php';
+require_once 'htmlpkg.php';
+require_once 'timestamplinker.php';
 
-    require_once 'dbAu.php';
+require_once 'dbAu.php';
 
-    if ($auth->isLogged()) {
+if ($auth->isLogged()) {
     // ログインしているアカウントをチェック
     $user = $auth->getCurrentSessionUserInfo();
     //   putHtmlNavibar('admin');
     //   print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
-    } else {
+} else {
     $title = '管理（エラー）';
     $h2 = "管理（エラー）";
     putHtmlHeader($title, $h2);
@@ -22,11 +22,11 @@
     putHtmlContainerClose();
     exit;
     // ここで終了
-    }
-    $evwcode = $_POST['evwcode'] ?? '';
-    if ($evwcode == '') {
+}
+$evwcode = $_POST['evwcode'] ?? '';
+if ($evwcode == '') {
     //UPDATE mode if evwcode is blank...
-    } else {
+} else {
     // checking if table tbvodraft is empty
     try {
         $db = getDb();
@@ -38,7 +38,6 @@
         //exit;
         if ($datacount['count(*)'] > 0) {
             print '<div>編集作業中のデータがあります<br>新たにセットリストの編集を始めるには、先に作業中のデータを削除するか、完了処理をしてください</div>';
-
         } else {
             //evwcode check
             $s = $db->query("select evwcode from tbevent;");
@@ -62,21 +61,19 @@
                     putHtmlNavibar(); ?>
 
 
-    <div id="eraseSLmodal" class="modal-overlay" style="display:flex;">
-    <div class="modal-dialog">
-<?php
+                    <div id="eraseSLmodal" class="modal-overlay" style="display:flex;">
+                        <div class="modal-dialog">
+                            <?php
 
-                    print "<div class=\"normalmessage\">選択されたイベントのセットリストはまだ存在しません<br>セットリストの新規作成をする場合、登録するイベントの選択操作は後で行います。編集開始ボタンを押さず、左欄から曲を選んで登録を開始してください</div>\n\n";
-                    print "<div class=\"modal-btnlike\"><a href=\"integeditor.php\"><div>〈管理〉統合編集のページに戻ります</div></a></div>\n\n";
-                    ?>
-                                </div></div>
+                            print "<div class=\"normalmessage\">選択されたイベントのセットリストはまだ存在しません<br>セットリストの新規作成をする場合、登録するイベントの選択操作は後で行います。編集開始ボタンを押さず、左欄から曲を選んで登録を開始してください</div>\n\n";
+                            print "<div class=\"modal-btnlike\"><a href=\"integeditor.php\"><div>〈管理〉統合編集のページに戻ります</div></a></div>\n\n";
+                            ?>
+                        </div>
+                    </div>
 <?php
 
                     putHtmlContainerClose();
                     exit;
-
-
-
                 }
 
                 print '<div>copying setlist to drafttable</div>';
@@ -85,23 +82,7 @@
                 $s->bindValue(':evwcode', $evwcode);
                 $res = $s->execute();
                 print '<div>ok</div>';
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/integeditor.php');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                header('Location: ./integeditor.php');
             } else {
                 print 'evwcode ng';
                 exit;
@@ -110,13 +91,4 @@
     } catch (PDOException $e) {
         die("Error:{$e->getMessage()}");
     }
-    }
-
-
-
-
-
-
-
-
-
+}
