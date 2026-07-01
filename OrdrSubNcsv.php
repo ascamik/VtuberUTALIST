@@ -13,8 +13,9 @@ function s($word)
     if ($word == "") {
         $html = "";
     } else {
+        $jeword = e(str_replace("'", "\'", $word));
         $eword = e($word);
-        $html = "<a href=\"javascript:void(0)\" onclick=\"sendPost('$eword', 'artistandp')\">{$eword}</a>";
+        $html = "<a href=\"javascript:void(0)\" onclick=\"sendPost('$jeword', 'artistandp')\">{$eword}</a>";
     }
     return $html;
 }
