@@ -1,0 +1,110 @@
+.songlistcontainer {
+    height: 75.5svh;
+    /* 縦サイズの固定値 */
+    overflow-y: scroll;
+    margin: 0px;
+
+}
+
+.allsonglist_group>div.navi_link {
+    display: inline;
+    background-color: #e0eafa
+}
+
+.allsonglist_link {
+    white-space: nowrap;
+    padding: 2px 3px;
+    margin: 1px 3px;
+    border-style: none;
+    border-width: 1px 1px;
+    border-color: #03294a6b;
+    /*   display: inline;
+    vertical-align: middle; */
+    font-size: 1.1em;
+    font-weight: 450;
+    background: #dee8f7;
+    border-radius: 0.25rem;
+    min-width: 25px;
+    overflow: hidden;
+    text-align: center;
+
+
+    /* background-color: #fffd85; */
+}
+
+div.hidden {
+    display: none;
+}
+
+div.allsonglist_link a {
+    display: block;
+}
+
+div.allsonglist_link:hover {
+    background: #f6f9ff;
+}
+
+.allsonglist_group {
+    display: flex;
+    /* justify-content: space-evenly; */
+    background-color: #cba4ff;
+    /* background-color: #79aafa; */
+    padding: 5px;
+    border-radius: 5px 5px 0px 0px;
+    /* position: sticky;
+    top: 0px; */
+    margin: 0 0 0 1px;
+}
+
+.search-area {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.search-area img {
+    margin: 2px 3px;
+}
+
+
+#searchBox {
+    width: 320px;
+    max-width: 100%;
+    padding: 8px 10px;
+    font-size: 15px;
+    border-radius: 15px 0 0 15px;
+    border: #555 solid 1px;
+
+}
+
+input#searchBox:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+#searchCount {
+    margin-top: 6px;
+    margin-left: 5px;
+    color: #666;
+    font-size: 0.9rem;
+
+}
+
+.clear-btn {
+
+    right: 10px;
+    top: 50%;
+
+    border: #555 solid;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 0 15px 15px 0;
+    background: none;
+    cursor: pointer;
+    display: block;
+    font-size: 1.2rem;
+    width: 32px
+        /* 常に表示 */
+}
+
+.song-hidden {
+    display: none !important;
+}
