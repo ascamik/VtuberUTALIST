@@ -322,7 +322,7 @@ print '</div>'; //editorcontainer close
 </dialog>
 <?php
 $jscript = <<<'EOD'
- <script src=iedslsupport.js></script>
+ <script src="iedslsupport.js"></script>
  <script>
 
 
