@@ -13,7 +13,7 @@ $source = <<<EOD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ,user-scalable=yes" >
     <meta name="referrer" content="no-referrer">
-    <meta name="copyright" content="(c) ASCAMI.kei 2023-2025">
+    <meta name="copyright" content="(c) ASCAMI.kei 2023-2026">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -58,6 +58,26 @@ $jscript
             }
         });
     </script>
+</body>
+</html>
+EOD;
+
+print $source;
+
+}
+function putHtmlContainerCloseV2($jscript=''){
+$source= <<<EOD
+</div>
+</div>
+</main>
+<footer>
+<div id="copyright">(c) ASCAMI Kei</div>
+<div id="footer">
+<a href="about.html">このサイトについて...</a>
+</div>
+</footer>
+$jscript
+
 </body>
 </html>
 EOD;
