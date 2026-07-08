@@ -1,9 +1,17 @@
+h2 {
+    display: none;
+}
+
 .songlistcontainer {
     height: 75.5svh;
     /* 縦サイズの固定値 */
     overflow-y: scroll;
     margin: 0px;
 
+}
+
+.allsonglist_group {
+    color: #FFF;
 }
 
 .allsonglist_group>div.navi_link {
@@ -24,8 +32,8 @@
     font-weight: 450;
     background: #dee8f7;
     border-radius: 0.25rem;
-    min-width: 25px;
-    overflow: hidden;
+    /* min-width: 25px;
+    overflow: hidden; */
     text-align: center;
 
 
@@ -58,7 +66,8 @@ div.allsonglist_link:hover {
 
 .search-area {
     display: flex;
-    margin-bottom: 12px;
+    margin-bottom: auto;
+    margin-top: auto;
 }
 
 .search-area img {
@@ -107,4 +116,103 @@ input#searchBox:focus {
 
 .song-hidden {
     display: none !important;
+}
+
+.tag-cloud {
+    display: flex;
+    margin: 2px;
+    padding: 1px 2px;
+    border-radius: 10px;
+    border: #e1aeff dotted 1px;
+    align-items: center;
+}
+
+.tag-cloud img {
+    margin: 2px 3px;
+}
+
+/* チェックボックス本体を非表示にしつつ、アクセシビリティを確保 */
+.btn-checkbox input {
+    position: absolute;
+    opacity: 0;
+
+}
+
+.btn-checkbox {
+    margin: auto 3px;
+    padding: 6px 0px;
+}
+
+/* ボタンの基本デザイン */
+.btn-content {
+    white-space: nowrap;
+    display: inline-block;
+    padding: 2px 16px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    background-color: #f0f0f0;
+    border: 1px solid #cccccc;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    /* 立体感のある外側の影 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* マウスオーバー時のエフェクト */
+.btn-checkbox:hover .btn-content {
+    background-color: #e6e6e6;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* チェック（ON）された時の押し込み状態 */
+.btn-checkbox input:checked+.btn-content {
+    background-color: #0099ff;
+    /* 影を内側にして押し込まれた感を出す */
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
+    /* 実際に少し沈むアニメーション */
+    transform: translateY(2px);
+    font-weight: bold;
+    color: #fff;
+}
+
+.genre-ui {
+    margin-left: auto;
+}
+
+.genre-ui .btn-checkbox {
+    margin: auto 1px;
+    padding: 6px 0px;
+}
+
+.genre-ui .btn-content {
+    white-space: nowrap;
+
+    font-size: 12px;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+
+.genre-ui .btn-content {
+    border-radius: 5px;
+}
+
+.genre-ui input:checked+.btn-content {
+    background-color: #ffe551f6;
+    color: #000;
+    text-decoration: none;
+}
+
+
+.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.sort-mark {
+    display: inline-block;
+    width: 1em;
+    text-align: center;
+    color: #888;
 }

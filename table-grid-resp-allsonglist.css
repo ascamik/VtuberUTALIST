@@ -1,3 +1,9 @@
+#song-th-row {
+    position: sticky;
+    top: 0px;
+
+}
+
 div.songlistanchor {
     background: #cba4ff;
     color: #ffffff;
@@ -12,7 +18,7 @@ div.songlistanchor {
     /* margin-right: 8px; */
     border-radius: 5px;
     position: sticky;
-    top: 0px;
+    top: 1.4em;
 
 }
 
@@ -90,7 +96,7 @@ div.songlistanchor {
 
 .table {
 
-    border-width: 4px 0px;
+    border-width: 1px 0px;
     border-style: solid;
     /*border-color:#03294a6b;*/
     border-color: #f0e4a5;
@@ -107,7 +113,54 @@ div.songlistanchor {
     font-size: 1rem;
 }
 
+#v2navicontainer {
+    display: block;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.v2menubar {
+    display: flex;
+    margin: 2px auto 2px 2px;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.v2navilink {
+    border: 1px #f8ed88 solid;
+    background-color: #f8ed88;
+    border-radius: 5px;
+    height: 1.5rem;
+    display: inline-block;
+    min-width: 2rem;
+    text-align: center;
+    margin-right: 5px;
+    padding: 0px 5px;
+
+
+}
+
+.v2navilink:hover {
+    border: 1px #f8ed88 solid;
+    background-color: #f8f3c4;
+}
+
+.v2navilink a {
+    height: 1.4rem;
+
+}
+
+.v2navilink img {
+    height: 1.4rem;
+}
+
 @media (min-width: 900px) {
+
+    #v2navicontainer {
+        display: flex;
+        align-items: center;
+    }
+
     .table {
         display: table;
     }
@@ -149,12 +202,12 @@ div.songlistanchor {
     }
 
     .cell:nth-child(2) {
-        width: 12rem;
+        width: 11rem;
     }
 
     .cell:nth-child(3) {
-        width: 50px;
-        font-size: 0.75rem;
+        width: 55px;
+        font-size: 0.60rem;
         text-align: center;
     }
 
@@ -172,7 +225,8 @@ div.songlistanchor {
     }
 
     .cell:nth-child(7) {
-        width: 2rem;
+        width: 2.5rem;
+        font-size: 0.70rem;
     }
 
     div.songlistanchor {
@@ -186,5 +240,7 @@ div.songlistanchor {
         top: 0px; */
         padding: 6px;
         margin-top: 0px;
+        width: max-content;
+        min-width: 6rem;
     }
 }

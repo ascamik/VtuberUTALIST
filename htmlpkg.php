@@ -82,6 +82,27 @@ function putHtmltextarea_close()
 EOD;
     print $source;
 }
+function putHtmlContainerCloseV2($jscript = '')
+{
+    $source = <<<EOD
+</div>
+</div>
+</main>
+<footer>
+<div id="copyright">(c) ASCAMI Kei</div>
+<div id="footer">
+<a href="about.html">このサイトについて...</a>
+</div>
+</footer>
+$jscript
+
+</body>
+</html>
+EOD;
+
+    print $source;
+}
+
 
 
 
