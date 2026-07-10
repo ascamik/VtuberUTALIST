@@ -3,7 +3,8 @@ body {
     background-color: #e1ddd6;
     /* background:  linear-gradient( rgba(206, 199, 197, 0.993),  rgb(202, 170, 132));*/
     /*  font-family: "Yu Gothic","Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", sans-serif; */
-    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", sans-serif;
+    /* font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", sans-serif; */
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Noto Sans JP", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "游ゴシック", YuGothic, sans-serif;
     font-weight: 370;
     font-size: 0.9rem;
     padding: 0px;
@@ -22,7 +23,7 @@ footer {
     /*  background-color: #FFFFFF; */
 
     max-width: 980px;
-    min-width: 300px;
+    min-width: 350px;
     margin: 0px auto;
     /*  padding:5px 20px; */
     text-align: right;
@@ -84,6 +85,7 @@ div#copyright {
     color: #fcf3f3;
     background-color: #FFFFFF;
     text-align: center !important;
+    display: none;
 
 }
 
@@ -126,7 +128,7 @@ div.navi_group {
     margin: 0px 5px 0px 0px;
     border-style: solid;
     border-width: 2px;
-    border-color: #fff2a1;
+    border-color: #ffec95;
     border-radius: 0.3rem;
 }
 
@@ -135,7 +137,7 @@ div.navi_group_dummy {
     display: flex;
     padding: 1px 1px;
     margin: 1px 2px;
-    background: #fff2a1;
+    background: linear-gradient(#f9e99a, #fff1a9, #f2e49f);
 
     border-radius: 0.3rem;
 
@@ -146,7 +148,7 @@ div.navi_group_dummy_ad {
     display: flex;
     padding: 1px 4px;
     margin: 1px 2px;
-    background: #fff2a1;
+    background: linear-gradient(#e8ae49, #ffd3a9, #e9a857);
     border-radius: 0.3rem;
 
 
@@ -164,7 +166,7 @@ div.navi_group_dummy_ad {
     vertical-align: middle; */
     font-size: 1.1em;
     font-weight: 450;
-    background: #fff2a1;
+    background: linear-gradient(#f9e99a, #fff1a9, #f2e49f);
     border-radius: 0.25rem;
     min-width: 36px;
     text-align: center;
@@ -178,7 +180,7 @@ div.navi_link a {
 }
 
 div.navi_link:hover {
-    background: #ffe95b
+    background: #ebde71;
 }
 
 div.navi_link_home {
@@ -192,7 +194,7 @@ div.navi_link_home {
     vertical-align: middle;*/
     font-size: 1.5em;
     font-weight: 450;
-    background: #fff2a1;
+    background: linear-gradient(#f9e99a, #fff1a9, #f2e49f);
     border-radius: 0.25rem;
     min-width: 36px;
     text-align: center;
@@ -205,7 +207,7 @@ div.navi_link_home a {
 }
 
 div.navi_link_home:hover {
-    background: #ffe95b;
+    background: #ebde71;
 }
 
 div.navi_link_ad {
@@ -218,7 +220,7 @@ div.navi_link_ad {
     /* vertical-align: middle;
     display: inline;*/
     font-weight: 450;
-    background: #f1c73a;
+    background: linear-gradient(#e8ae49, #ffd3a9, #e9a852);
     border-radius: 0.25rem;
     min-width: 36px;
     text-align: center;
@@ -553,7 +555,7 @@ h1 {
 
     /*color: #664c93;*/
     color: #d8c411;
-    background-color: none;
+    background-color: transparent;
     /*background-color: #f5ee94;*/
     /*font-family: serif;*/
     font-weight: 500;

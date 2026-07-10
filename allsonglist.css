@@ -1,3 +1,8 @@
+h1 {
+    background-color: #fff;
+    margin-bottom: 4px;
+}
+
 h2 {
     display: none;
 }
@@ -28,7 +33,7 @@ h2 {
     border-color: #03294a6b;
     /*   display: inline;
     vertical-align: middle; */
-    font-size: 1.1em;
+    font-size: 0.85em;
     font-weight: 450;
     background: #dee8f7;
     border-radius: 0.25rem;
@@ -62,6 +67,12 @@ div.allsonglist_link:hover {
     /* position: sticky;
     top: 0px; */
     margin: 0 0 0 1px;
+}
+
+.info {
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .search-area {
@@ -125,6 +136,7 @@ input#searchBox:focus {
     border-radius: 10px;
     border: #e1aeff dotted 1px;
     align-items: center;
+
 }
 
 .tag-cloud img {
@@ -147,7 +159,7 @@ input#searchBox:focus {
 .btn-content {
     white-space: nowrap;
     display: inline-block;
-    padding: 2px 16px;
+    padding: 2px 8px;
     font-size: 14px;
     font-weight: 400;
     color: #333333;

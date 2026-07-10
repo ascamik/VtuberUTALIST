@@ -19,9 +19,9 @@ function s($word)
     return $html;
 }
 
-$title = '曲名一覧β（全曲）';
-$h2 = "曲名一覧表示β【全曲】";
-$aditionalcss = '<link rel="stylesheet" href="table-grid-resp-allsonglist.css?b2e5aa42"><link rel="stylesheet" href="allsonglist.css?b2e5aa5e">';
+$title = '曲名一覧[RC]（全曲）';
+$h2 = "曲名一覧表示[RC]【全曲】";
+$aditionalcss = '<link rel="stylesheet" href="table-grid-resp-allsonglist.css?b2e5aa43"><link rel="stylesheet" href="allsonglist.css?b2e5aa5f">';
 putHtmlHeader($title, $h2, $aditionalcss);
 //putHtmlHeader($title, $h2);
 //putHtmlNavibarV2();
@@ -66,7 +66,7 @@ putHtmlHeader($title, $h2, $aditionalcss);
         </label>
         <label class="btn-checkbox">
             <input type="checkbox" name="genre-chkd" value="AG" checked>
-            <span class="btn-content" title="Anime/Game">A,G</span>
+            <span class="btn-content" title="アニメ・ゲーム">A,G</span>
         </label>
         <label class="btn-checkbox">
             <input type="checkbox" name="genre-chkd" value="I" checked>
@@ -96,7 +96,7 @@ print '<div class="allsonglist_group">
 <div class="allsonglist_link"><a href="#song_h">は</a></div>
 <div class="allsonglist_link"><a href="#song_m">ま</a></div>
 <div class="allsonglist_link"><a href="#song_y">や・ら・わ</a></div>-->
-&#9432;見出しの各項目をクリックで並び替えをします（英数曲名はカナ読みに変更）
+<div class="info">&#9432;見出しの各項目をクリックで並び替えをします（英数曲名はカナ読みに変更）</div>
 </div>
 <div class="songlistcontainer">';
 
