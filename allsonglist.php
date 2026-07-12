@@ -11,10 +11,11 @@ function s($word)
     if ($word == "") {
         $html = "";
     } else {
-        $jeword = e(str_replace("'", "\'", $word));
+        $word = trim($word);
+        $jeword = e(str_replace('"', '\"', $word));
         $eword = e($word);
 
-        $html = "<a href=\"javascript:void(0)\" onclick=\"sendSearchBox('$jeword')\">{$eword}</a>";
+        $html = "<a href=\"javascript:void(0)\"  class=\"search-link\"  data-search-term=\"{$jeword}\">{$eword}</a>";
     }
     return $html;
 }
@@ -219,7 +220,10 @@ $icode2char = ['1' => '数字・英字', 'a' => 'あ（ゔ）', 'k' => 'か', 's
                     }
                     $tags = $systemTag;
                     $genre = e($row['genre']);
-
+                    $yomi1 = mb_substr($row['yomi'], 0, 1) . '*';
+                    if ($index == '1') {
+                        $yomi1 = $yomi . ' ' . mb_substr($row['sname'], 0, 1) . '*';
+                    }
                     $search = mb_strtolower(
                         preg_replace(
                             '/\s+/',
@@ -230,7 +234,8 @@ $icode2char = ['1' => '数字・英字', 'a' => 'あ（ゔ）', 'k' => 'か', 's
                                     $row['artist'],
                                     $row['vocap'],
                                     $row['tieup'],
-                                    $row['yomi']
+                                    $row['yomi'],
+                                    $yomi1
                                 ]),
                                 'asKV'
                             )

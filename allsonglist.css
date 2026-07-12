@@ -8,7 +8,7 @@ h2 {
 }
 
 .songlistcontainer {
-    height: 75.5svh;
+    height: calc(100vh - 11rem);
     /* 縦サイズの固定値 */
     overflow-y: scroll;
     margin: 0px;

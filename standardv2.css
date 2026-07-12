@@ -953,6 +953,50 @@ input#toggle {
     display: none;
 }
 
+
+#v2navicontainer {
+    display: block;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.v2menubar {
+    display: flex;
+    margin: 2px auto 2px 2px;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.v2navilink {
+    border: 1px #f8ed88 solid;
+    background-color: #f8ed88;
+    border-radius: 5px;
+    height: 1.5rem;
+    display: inline-block;
+    min-width: 2rem;
+    text-align: center;
+    margin-right: 5px;
+    padding: 0px 5px;
+
+
+}
+
+.v2navilink:hover {
+    border: 1px #f8ed88 solid;
+    background-color: #f8f3c4;
+}
+
+.v2navilink a {
+    height: 1.4rem;
+
+}
+
+.v2navilink img {
+    height: 1.4rem;
+}
+
+
+
 @media(max-width:890px) {
 
     div#navicontainer {

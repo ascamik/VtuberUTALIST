@@ -125,3 +125,26 @@ document.querySelectorAll('input[name="tag-chkd"]').forEach(checkbox => {
 document.querySelectorAll('input[name="genre-chkd"]').forEach(checkbox => {
     checkbox.addEventListener('change', debouncedProcess);
 });
+
+
+//アーティスト欄から検索語ペースト
+
+document.addEventListener('DOMContentLoaded', () => {
+    // すべての検索リンクを取得
+    const searchLinks = document.querySelectorAll('.search-link');
+
+    searchLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            // リンクのデフォルト動作（遷移など）をキャンセル
+            event.preventDefault();
+
+
+            const searchTerm = link.getAttribute('data-search-term');
+
+
+            if (typeof sendSearchBox === 'function') {
+                sendSearchBox(searchTerm);
+            }
+        });
+    });
+});

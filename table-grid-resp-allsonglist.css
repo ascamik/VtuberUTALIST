@@ -107,7 +107,7 @@ div.songlistanchor {
     border-style: solid;
     /*border-color:#03294a6b;*/
     border-color: #f0e4a5;
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
 }
 
 .strong4h>.cell:nth-child(1) a {
