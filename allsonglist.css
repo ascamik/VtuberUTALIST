@@ -134,7 +134,7 @@ input#searchBox:focus {
     margin: 2px;
     padding: 1px 2px;
     border-radius: 10px;
-    border: #e1aeff dotted 1px;
+    border: #e1aeff solid 1px;
     align-items: center;
 
 }
