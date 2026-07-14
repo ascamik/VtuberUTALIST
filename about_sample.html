@@ -17,46 +17,27 @@
     <main>
         <div id="container">
             <div id="main" ontouchstart="">
-                <h1>皇黄リリエ歌リスト〈非公式〉《仮設》</h1>
+                <h1>皇黄リリエ歌リスト〈非公式〉</h1>
                 <!--<div class="attention">お知らせ</div>-->
                 <h2>このサイトについて</h2>
                 <!--menu bar-->
-                <div id="navicontainer">
-                    <input id="toggle" type="checkbox">
-                    <div class="navi_group_dummy">
-                        <div class="navi_link_menu"><label for="toggle"><img id="hamburger" src="menu_24dp.svg"></label>
-                        </div>
+                <div id="v2navicontainer">
+                    <div class="v2menubar">
+                        <a href="./">
+                            <div class="v2navilink"><img src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg"></div>
+                        </a>
+                        <a href="allsonglist.php">
+                            <div class="v2navilink">全曲一覧</div>
+                        </a>
+                        <a href="evlist.php">
+                            <div class="v2navilink">配信一覧</div>
+                        </a>
+                        <a href="ordrlist.php">
+                            <div class="v2navilink">条件指定一覧</div>
+                        </a>
                     </div>
 
-                    <div class="navi_group_dummy">
-
-                        <div class="navi_link_home"><a href="./"><img
-                                    src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg" id="fleurDeLis"></a></div>
-                    </div>
-                    <div class="navi_group">
-                        <div class="navi_link"><a href="slistk.php?i=1">数字／英字</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=a">あ（ゔ）</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=k">か</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=s">さ</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=t">た</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=n">な</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=h">は</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=m">ま</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=y">や・ら・わ</a></div>
-                    </div>
-                    <div class="navi_group_dummy">
-
-                        <div class="navi_link"><a href="evlist.php?">配信一覧</a></div>
-                    </div>
-                    <div class="navi_group_dummy">
-
-                        <div class="navi_link"><a href="searchsong4u.php?">検索</a></div>
-                    </div>
-
-                    <div class="navi_group_dummy">
-                        <div class="navi_link"><a href="ordrlist.php?">条件指定一覧</a></div>
-                    </div>
-                </div>
+                </div><!--close navicontainerv2 -->
                 <!-- -->
 
                 <div class="textnote_mid_type2">
@@ -71,11 +52,7 @@
 
                     <p>個人制作の非公式サイトです。更新時期は不定期で、掲載内容の保証はありません。<strong>このサイトについて、本Vへの問い合わせはしないでください。</strong>
                     </p>
-                    <p>本サイトは、公開当初から
-                        https://ss1.xrea.com/krssfansite.s223.xrea.com/vsdb/ で運営しておりましたが、サーバのダウンが多いため、<br>
-                        2025年9月から当面の間<!--(2026年8月まで)-->は https://krssfansite.lsv.jp/sul/
-                        にてサーバを移して公開することにしました。早期閉鎖・再度移転などの可能性もありますので、いまのところ本仮設サイトURLへの恒久的なリンクはおすすめしません。なお、初期公開URLは入口としてできるだけ残す予定です。リンクが必要な場合は初期URLへお願いします。
-                    </p>
+
                     <p>制作にあたり、非公式Wiki、配信アーカイブの概要欄もしくは投稿コメントのセットリスト等を参考にさせていただきました。リリース日は管理者調べです。
                     </p>
 
@@ -84,9 +61,7 @@
                             があります。サイト利用の解説や、技術的な補足等をしています。</strong><a
                             href="https://daffy-rule-ffd.notion.site/SUL-Blog-e407cc44898f42228191b10ca5c2afc8?p=10c10ca2157280c89234cdc44a37b779&pm=c">FAQもあります。</a>
                     </p>
-                    <p>管理者へ届く<a
-                            href="https://marshmallow-qa.com/qgdej3s26p8tznr">マシュマロ</a>があります。間違いの指摘などはこちらで。また、返事を必要としない連絡にもどうぞ。マシュマロの内容は公開される場合があります。<!--<br>本サイトについて、掲示や予告せずコンテンツの変更、修正を随時実施する場合があります。-->
-                    </p>
+
 
                     <p>管理者への連絡(法律によるもの含む)はメールでお願いします<br><img src="mad.png"></p>
 
@@ -109,7 +84,7 @@
 
                         <li>2025-11-01 配信一覧ページ等の配信タイトル欄にリレー表示アイコンを追加しました</li>
                         <li>2025-11-15 配信一覧ページの並び順と表示数を設定できるようになりました．また、デフォルト表示を降順（新しいものを先頭）に変更しました</li>
-<li>2025-12-31 検索の結果に「直近日付」「回数」の表示を追加しました（検索は実験的実装です）</li>
+                        <li>2025-12-31 検索の結果に「直近日付」「回数」の表示を追加しました（検索は実験的実装です）</li>
                     </ul>
 
 
@@ -125,16 +100,7 @@
             (c) ASCAMI Kei
         </div>
     </footer>
-    <script>
-        document.getElementById("toggle").addEventListener("change", function () {
-            let image = document.getElementById("hamburger");
-            if (this.checked) {
-                image.src = "close_24dp.svg"; // チェックされたときの画像
-            } else {
-                image.src = "menu_24dp.svg"; // チェックが外れたときの画像
-            }
-        });
-    </script>
+
 </body>
 
 </html>

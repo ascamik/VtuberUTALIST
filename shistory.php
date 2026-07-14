@@ -33,7 +33,7 @@ $title = '曲情報・歌唱歴';
 $h2 = "曲情報・歌唱歴";
 $aditionalcss = '<link rel="stylesheet" href="table-grid-resp-shistory.css?b2e5aacd">';
 putHtmlHeader($title, $h2, $aditionalcss);
-putHtmlNavibar();
+putHtmlNavibarV2();
 ?>
 
 <div id="toptableoutline">
@@ -186,4 +186,4 @@ putHtmlNavibar();
     ?>
 </div>
 <?php
-putHtmlContainerClose();
+putHtmlContainerCloseV2();

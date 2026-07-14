@@ -157,6 +157,38 @@ EOD;
 
     print $source;
 }
+function putHtmlNavibarV2($p = "")
+{
+    $exmenu = '';
+    if ($p == "admin") {
+        $exmenu = '<a href="sen_nowusr.php"><div class="v2navilink">管理</div></a>';
+    }
+
+    $source = <<<EOD
+<div id="v2navicontainer">
+    <div class="v2menubar">
+        <a href="./">
+            <div class="v2navilink"><!--<img
+                    src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg">--><img
+                                    src="home_24dp_2C54B7_FILL0_wght400_GRAD0_opsz24.svg" id="fleurDeLis"></div>
+        </a>
+        <a href="allsonglist.php?">
+            <div class="v2navilink">全曲一覧</div>
+        </a>
+        <a href="evlist.php?">
+            <div class="v2navilink">配信一覧</div>
+        </a>
+        <a href="ordrlist.php?">
+            <div class="v2navilink">条件指定一覧</div>
+        </a>
+{$exmenu}
+
+</div>
+</div><!--close navicontainerv2 -->
+EOD;
+
+    print $source;
+}
 
 function putHtmlText($text)
 {

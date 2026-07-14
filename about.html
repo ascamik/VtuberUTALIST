@@ -21,44 +21,24 @@
                 <!--<div class="attention">お知らせ</div>-->
                 <h2>このサイトについて</h2>
                 <!--menu bar-->
-                <div id="navicontainer">
-                    <input id="toggle" type="checkbox">
-                    <div class="navi_group_dummy">
-                        <div class="navi_link_menu"><label for="toggle"><img id="hamburger" src="menu_24dp.svg"></label>
-                        </div>
+                <div id="v2navicontainer">
+                    <div class="v2menubar">
+                        <a href="./">
+                            <div class="v2navilink"><img src="home_24dp_2C54B7_FILL0_wght400_GRAD0_opsz24.svg"
+                                    id="fleurDeLis"></div>
+                        </a>
+                        <a href="allsonglist.php">
+                            <div class="v2navilink">全曲一覧</div>
+                        </a>
+                        <a href="evlist.php">
+                            <div class="v2navilink">配信一覧</div>
+                        </a>
+                        <a href="ordrlist.php">
+                            <div class="v2navilink">条件指定一覧</div>
+                        </a>
                     </div>
 
-                    <div class="navi_group_dummy">
-
-                        <div class="navi_link_home"><a href="./"><img
-                                    src="home_24dp_2C54B7_FILL0_wght400_GRAD0_opsz24.svg" id="fleurDeLis"><!--<img
-                                    src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg" id="fleurDeLis">--></a>
-                        </div>
-                    </div>
-                    <div class="navi_group">
-                        <div class="navi_link"><a href="slistk.php?i=1">数字／英字</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=a">あ（ゔ）</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=k">か</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=s">さ</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=t">た</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=n">な</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=h">は</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=m">ま</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=y">や・ら・わ</a></div>
-                    </div>
-                    <div class="navi_group_dummy">
-
-                        <div class="navi_link"><a href="evlist.php?">配信一覧</a></div>
-                    </div>
-                    <div class="navi_group_dummy">
-
-                        <div class="navi_link"><a href="searchsong4u.php?">検索</a></div>
-                    </div>
-
-                    <div class="navi_group_dummy">
-                        <div class="navi_link"><a href="ordrlist.php?">条件指定一覧</a></div>
-                    </div>
-                </div>
+                </div><!--close navicontainerv2 -->
                 <!-- -->
 
                 <div class="textnote_mid_type2">
@@ -94,16 +74,7 @@
             (c) ASCAMI Kei
         </div>
     </footer>
-    <script>
-        document.getElementById("toggle").addEventListener("change", function () {
-            let image = document.getElementById("hamburger");
-            if (this.checked) {
-                image.src = "close_24dp.svg"; // チェックされたときの画像
-            } else {
-                image.src = "menu_24dp.svg"; // チェックが外れたときの画像
-            }
-        });
-    </script>
+
 </body>
 
 </html>

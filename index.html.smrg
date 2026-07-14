@@ -27,41 +27,24 @@
                 <h2>
                     皇黄リリエ ⚜ 歌リスト
                 </h2>
-                <div id="navicontainer">
-                    <input id="toggle" type="checkbox">
-                    <div class="navi_group_dummy">
-                        <div class="navi_link_menu"><label for="toggle"><img id="hamburger" src="menu_24dp.svg"></label>
-                        </div>
-                    </div>
-                    <div class="navi_group_dummy">
-
-                        <div class="navi_link_home"><a href="./"><img
-                                    src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg" id="fleurDeLis"></a></div>
-                    </div>
-                    <div class="navi_group">
-                        <div class="navi_link"><a href="slistk.php?i=1">数字／英字</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=a">あ（ゔ）</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=k">か</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=s">さ</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=t">た</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=n">な</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=h">は</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=m">ま</a></div>
-                        <div class="navi_link"><a href="slistk.php?i=y">や・ら・わ</a></div>
-                    </div>
-                    <div class="navi_group_dummy">
-
-                        <div class="navi_link"><a href="evlist.php">配信一覧</a></div>
-                    </div>
-                    <div class="navi_group_dummy">
-
-                        <div class="navi_link"><a href="searchsong4u.php">検索</a></div>
-                    </div>
-                    <div class="navi_group_dummy">
-                        <div class="navi_link"><a href="ordrlist.php">条件指定一覧</a></div>
+                <div id="v2navicontainer">
+                    <div class="v2menubar">
+                        <a href="./">
+                            <div class="v2navilink"><img
+                    src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg"></div>
+                        </a>
+                        <a href="allsonglist.php">
+                            <div class="v2navilink">全曲一覧</div>
+                        </a>
+                        <a href="evlist.php">
+                            <div class="v2navilink">配信一覧</div>
+                        </a>
+                        <a href="ordrlist.php">
+                            <div class="v2navilink">条件指定一覧</div>
+                        </a>
                     </div>
 
-                </div>
+                </div><!--close navicontainerv2 -->
 
                 <div class="textnote_center">
                     <p><a href="https://www.youtube.com/@sumeragi_Lilie">皇黄リリエ</a>がライブ配信等で歌った歌をまとめている非公式サイトです<br>
@@ -115,10 +98,7 @@
 
                     <p id="manual"><img src="man_lsv.png"></p>
                     <div class="leftalign">
-                        <p>スマホからの閲覧時は、画面左上の<img class="icon" src="menu_24dp.svg">をタップでメニューを開き、項目を選んでください。<br>
-                            <!--    ★セットリストページにサイト内YouTube動画再生機能を追加しました。<br>
-                            ★曲名が英数で始まる場合、[数字／英字]と該当のかなの両方に掲載されています。-->
-                        </p>
+                        
                     </div>
                 </div>
             </div>
@@ -150,16 +130,7 @@
         }
 
     </script>
-    <script>
-        document.getElementById("toggle").addEventListener("change", function () {
-            let image = document.getElementById("hamburger");
-            if (this.checked) {
-                image.src = "close_24dp.svg"; // チェックされたときの画像
-            } else {
-                image.src = "menu_24dp.svg"; // チェックが外れたときの画像
-            }
-        });
-    </script>
+
 
 
 </body>

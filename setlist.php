@@ -68,7 +68,7 @@ try {
         $aditionalcss = '<link rel="stylesheet" href="table-grid-resp-setlist.css?b2e5ab03">';
         putHtmlHeader($title, $h2, $aditionalcss);
         //putHtmltext('タイムスタンプの時刻をクリック／タップすると動画の再生が開始します。音量等にご注意ください。');
-        putHtmlNavibar();
+        putHtmlNavibarV2();
 
 
 
@@ -340,4 +340,4 @@ $script = <<<EOD
         }
 </script>
 EOD;
-putHtmlContainerClose($script);
+putHtmlContainerCloseV2($script);

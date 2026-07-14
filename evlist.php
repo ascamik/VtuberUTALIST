@@ -60,7 +60,7 @@ $title = '歌配信一覧';
 $h2 = "歌配信一覧" . $pageTitle;
 $aditionalcss = '<link rel="stylesheet" href="eventlistresp.css?b2e5aacf">';
 putHtmlHeader($title, $h2, $aditionalcss);
-putHtmlNavibar();
+putHtmlNavibarV2();
 ?>
 
 <div id="tableoutline">
@@ -211,4 +211,4 @@ function closeModal() {
 
 
 EOD;
-putHtmlContainerClose($script);
+putHtmlContainerCloseV2($script);
