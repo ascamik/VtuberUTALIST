@@ -20,8 +20,8 @@ function s($word)
     return $html;
 }
 
-$title = '曲名一覧[RC]（全曲）';
-$h2 = "曲名一覧表示[RC]【全曲】";
+$title = '曲名一覧（全曲）';
+$h2 = "曲名一覧表示【全曲】";
 $aditionalcss = '<link rel="stylesheet" href="table-grid-resp-allsonglist.css?b2e5aa43"><link rel="stylesheet" href="allsonglist.css?b2e5aa5f">';
 putHtmlHeader($title, $h2, $aditionalcss);
 //putHtmlHeader($title, $h2);
@@ -222,7 +222,7 @@ $icode2char = ['1' => '数字・英字', 'a' => 'あ（ゔ）', 'k' => 'か', 's
                     $genre = e($row['genre']);
                     $yomi1 = mb_substr($row['yomi'], 0, 1) . '*';
                     if ($index == '1') {
-                        $yomi1 = $yomi . ' ' . mb_substr($row['sname'], 0, 1) . '*';
+                        $yomi1 = $yomi1 . ' ' . mb_substr($row['sname'], 0, 1) . '*';
                     }
                     $search = mb_strtolower(
                         preg_replace(
