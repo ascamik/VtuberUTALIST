@@ -995,7 +995,10 @@ input#toggle {
     height: 1.4rem;
 }
 
-
+.adminnavi {
+    border: 1px #e9a852 solid;
+    background-color: #e9a852;
+}
 
 @media(max-width:890px) {
 

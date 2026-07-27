@@ -18,11 +18,11 @@ putHtmlHeader($title, $h2, $css);
 if ($auth->isLogged()) {
     // ログインしているアカウントをチェック
     $user = $auth->getCurrentSessionUserInfo();
-    putHtmlNavibar('admin');
+    putHtmlNavibarV2('admin');
     print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
     // $admin = 'admin'; //Not used
 } else {
-    putHtmlNavibar();
+    putHtmlNavibarV2();
     print "<div class=\"normalmessage\">ログインしていません</div>\n\n";
     print "<div class=\"normalmessage\"><a href=\"sen_nowusr.php\">ログインはこちら</a></div>\n\n";
     // $admin = '';
@@ -558,4 +558,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
         </script>
 EOD;
-putHtmlContainerClose($jscript);
+putHtmlContainerCloseV2($jscript);

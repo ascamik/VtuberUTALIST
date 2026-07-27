@@ -161,7 +161,7 @@ function putHtmlNavibarV2($p = "")
 {
     $exmenu = '';
     if ($p == "admin") {
-        $exmenu = '<a href="sen_nowusr.php"><div class="v2navilink">管理</div></a>';
+        $exmenu = '<a href="sen_nowusr.php"><div class="v2navilink adminnavi">管理</div></a>';
     }
 
     $source = <<<EOD
