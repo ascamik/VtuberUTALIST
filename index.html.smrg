@@ -5,21 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ,user-scalable=yes">
     <meta name="referrer" content="no-referrer">
-    <meta name="copyright" content="(c) ASCAMI.kei 2023-2025">
-    <!-- <meta name="keywords" content="皇黄リリエ歌データベース,皇黄リリエ歌リスト,皇黄リリエ歌配信歌データベース" > -->
+    <meta name="copyright" content="(c) ASCAMI.kei 2023-2026">
+    <!-- <meta name="keywords" content="V様歌データベース,V様歌リスト,V様歌配信歌データベース" > -->
     <link rel="stylesheet" href="standardv2.css?9c62729e">
     <link rel="stylesheet" href="top.css?fc9e0a8c">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <title>皇黄リリエ歌リスト〈非公式〉《仮設》</title>
+    <title>皇黄リリエ歌リスト〈非公式〉</title>
 </head>
 
 <body>
     <main>
         <div id="container">
             <div id="main" ontouchstart="">
-                <h1>皇黄リリエ歌リスト〈非公式〉《仮設》</h1>
+                <h1>皇黄リリエ歌リスト〈非公式〉</h1>
                 <!--
     <div class="attention">2025.7.15〜データベース障害により利用できない場合があります</div>
     -->
@@ -30,8 +30,8 @@
                 <div id="v2navicontainer">
                     <div class="v2menubar">
                         <a href="./">
-                            <div class="v2navilink"><img
-                    src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg"></div>
+                            <div class="v2navilink"><img src="home_24dp_2C54B7_FILL0_wght400_GRAD0_opsz24.svg"
+                                    id="fleurDeLis"></div>
                         </a>
                         <a href="allsonglist.php">
                             <div class="v2navilink">全曲一覧</div>
@@ -48,58 +48,23 @@
 
                 <div class="textnote_center">
                     <p><a href="https://www.youtube.com/@sumeragi_Lilie">皇黄リリエ</a>がライブ配信等で歌った歌をまとめている非公式サイトです<br>
-                        <!--
-    曲名順表示のリンクからは採用された配信履歴を表示できます<br>
-    配信リストからはセットリスト形式の表示へリンクしています<br>タイムスタンプがある曲は配信アーカイブの場面へリンクしています</p>
-    -->
-                        <br><!-- 上記のメニューバーから表示したい項目を選んで下さい -->
+
+
+                        <br>
                     </p>
-                    <div class="pdmenucontainer">
-                        <div class="pdmenu">
-                            <div class="pdmenu_title">曲名一覧（曲→歌唱歴）▽</div><!--※ヴは「あ行（う）」、∀は「数字・英字（A）」、Θは「さ行（し）」に掲載-->
-                            <div class="pd_navi_group">
-                                <div class="pd_navi_link"><a href="slistk.php?i=1">数字／英字</a></div>
-                                <div class="pd_navi_link"><a href="slistk.php?i=a">あ（ゔ）</a></div>
-                                <div class="pd_navi_link"><a href="slistk.php?i=k">か</a></div>
-                                <div class="pd_navi_link"><a href="slistk.php?i=s">さ</a></div>
-                                <div class="pd_navi_link"><a href="slistk.php?i=t">た</a></div>
-                                <div class="pd_navi_link"><a href="slistk.php?i=n">な</a></div>
-                                <div class="pd_navi_link"><a href="slistk.php?i=h">は</a></div>
-                                <div class="pd_navi_link"><a href="slistk.php?i=m">ま</a></div>
-                                <div class="pd_navi_link"><a href="slistk.php?i=y">や・ら・わ</a></div>
-                                <div class="pd_navi_link">
-                                    <a href="ordrlist.php">(掲載全曲一括表示)</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
 
                     <div class="vmenu">
 
+                        <div class="v_navi_link"><a href="allsonglist.php">全曲リスト</a>&nbsp;&nbsp;<a
+                                href="javascript:OnLinkClick();">(▼説明)</a></div>
                         <div class="v_navi_link"><a href="evlist.php">配信一覧（→セットリスト）</a></div>
-                        <!-- <div class="v_navi_link"><a href="evlist.php">掲載済み配信リスト</a></div>-->
-                    </div>
-                    <div class="textnote">選曲補助リスト（自動抽出）<br>
-                        <ul>
-                            <li><a href="ranking.php">ランキング上位リスト</a></li>
-                            <li><a href="helperbeta.php">1回歌唱リスト</a></li>
-                            <li><a href="helper2beta.php">最近歌ってないかも？リスト</a></li>
-                        </ul>
-                    </div>
-                    <div class="vmenu">
 
-                        <div class="v_navi_link">
-                            <a href="ordrlist.php">掲載全曲（条件指定可）</a>
-                        </div><a href="javascript:OnLinkClick();">▼説明</a> 
                     </div>
-                    <!--<br> ★原曲のリリース日情報を追加しました★
-                        （PCからは年表記にマウスカーソルを当てると年月日を表示します）-->
+                    <p id="manual"><img src="sulv2helpsml.png"></p>
 
-                    <p id="manual"><img src="man_lsv.png"></p>
-                    <div class="leftalign">
-                        
-                    </div>
+
+
                 </div>
             </div>
         </div>
