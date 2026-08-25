@@ -63,6 +63,7 @@ if ($_POST['sname'] and $_POST['yomi'] and (array_key_exists($genre, $genreCodeM
                 'success' => false,
                 'message' => "DBError:", //{$e->getMessage()}",
             ]);
+            exit;
         }
     }
     if ($checkSongExists) {
@@ -105,6 +106,7 @@ if ($_POST['sname'] and $_POST['yomi'] and (array_key_exists($genre, $genreCodeM
                 'success' => false,
                 'message' => "DBError:", //{$e->getMessage()}",
             ]);
+            exit;
         }
     }
 } else {
@@ -114,5 +116,4 @@ if ($_POST['sname'] and $_POST['yomi'] and (array_key_exists($genre, $genreCodeM
         'message' => '更新できませんでした。<br>曲名とよみは必ず入力してください',
     ]);
     exit;
-} {
 }

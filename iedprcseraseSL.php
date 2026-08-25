@@ -52,10 +52,8 @@ try {
     //$s->bindValue(':drafttype', $mode);
     $s->execute();
 
-//下書きも消去
+    //下書きも消去
     $s = $db->query("DELETE FROM tbvodraft WHERE drafttype IN ('D' ,'E')");
-
-
 } catch (PDOException $e) {
     //die("Error:{$e->getMessage()}");
     $txt = $e->getMessage();
@@ -66,6 +64,7 @@ try {
         'success' => false,
         'message' => $errcode,
     ]);
+    exit;
 }
 header('Content - Type: application / json;
     charset = utf - 8');

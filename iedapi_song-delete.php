@@ -65,6 +65,7 @@ try {
         'success' => false,
         'message' => "DBError:", //{$e->getMessage()}",
     ]);
+    exit;
 }
 
 
@@ -98,6 +99,7 @@ try {
         'success' => false,
         'message' => "DBError:", //{$e->getMessage()}",
     ]);
+    exit;
 }
 echo json_encode([
     'success' => true,
