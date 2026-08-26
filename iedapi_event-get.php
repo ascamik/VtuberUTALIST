@@ -13,6 +13,7 @@ if ($auth->isLogged()) {
     //   print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
 } else {
     //403
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => 'Forbidden',
@@ -34,7 +35,7 @@ try {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (! $row) {
-
+        header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
             'message' => 'データが存在しません',
@@ -42,13 +43,13 @@ try {
 
         exit;
     }
-
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => true,
         'data' => $row,
     ]);
 } catch (PDOException $e) {
-
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         //   'message' => 'データ取得に失敗しました',

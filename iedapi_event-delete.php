@@ -13,6 +13,7 @@ if ($auth->isLogged()) {
     //   print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
 } else {
     //403
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => 'Forbidden',
@@ -33,7 +34,7 @@ try {
     ]);
 
     if ($stmt->fetchColumn() > 0) {
-
+        header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
             'message' =>
@@ -49,6 +50,7 @@ try {
     $evwcodelist = $s->fetchAll(PDO::FETCH_COLUMN); //single array, like  ['data1','data2',...]
     // print_r($evwcode);
     if (! (in_array($evwcode, $evwcodelist))) {
+        header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
             'message' =>
@@ -67,13 +69,14 @@ try {
         $_POST['evwcode'],
     ]);
 } catch (PDOException $e) {
-
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => "DBError:", //{$e->getMessage()}",
     ]);
     exit;
 }
+header('Content-Type: application/json; charset=UTF-8');
 echo json_encode([
     'success' => true,
 ]);

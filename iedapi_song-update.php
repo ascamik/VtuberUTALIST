@@ -12,6 +12,7 @@ if ($auth->isLogged()) {
     $user = $auth->getCurrentSessionUserInfo();
 } else {
     //403
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => 'Forbidden',
@@ -31,6 +32,7 @@ if ($_POST['sname'] and $_POST['yomi'] and (array_key_exists($genre, $genreCodeM
         } elseif (! ($arrng)) { // arrng==null or 0
             $arrng = "0";
         } else { //arrng == non-numeric
+            header('Content-Type: application/json; charset=UTF-8');
             echo json_encode([
                 'success' => false,
                 'message' => 'error! illegal arrng',
@@ -50,6 +52,7 @@ if ($_POST['sname'] and $_POST['yomi'] and (array_key_exists($genre, $genreCodeM
             if ($exists) {
                 $checkSongExists = True;
             } else {
+                header('Content-Type: application/json; charset=UTF-8');
                 echo json_encode([
                     'success' => false,
                     'message' => 'IDのデータはありません',
@@ -58,7 +61,7 @@ if ($_POST['sname'] and $_POST['yomi'] and (array_key_exists($genre, $genreCodeM
                 exit;
             }
         } catch (PDOException $e) {
-
+            header('Content-Type: application/json; charset=UTF-8');
             echo json_encode([
                 'success' => false,
                 'message' => "DBError:", //{$e->getMessage()}",
@@ -96,12 +99,13 @@ if ($_POST['sname'] and $_POST['yomi'] and (array_key_exists($genre, $genreCodeM
             }
 
             $s->execute();
+            header('Content-Type: application/json; charset=UTF-8');
             echo json_encode([
                 'success' => true,
             ]);
             exit;
         } catch (PDOException $e) {
-
+            header('Content-Type: application/json; charset=UTF-8');
             echo json_encode([
                 'success' => false,
                 'message' => "DBError:", //{$e->getMessage()}",
@@ -111,6 +115,7 @@ if ($_POST['sname'] and $_POST['yomi'] and (array_key_exists($genre, $genreCodeM
     }
 } else {
     //if sname or yomi is(are) blank
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => '更新できませんでした。<br>曲名とよみは必ず入力してください',

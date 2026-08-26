@@ -11,6 +11,7 @@ if ($auth->isLogged()) {
     $user = $auth->getCurrentSessionUserInfo();
 } else {
     //403
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => 'Forbidden',
@@ -26,6 +27,7 @@ if (preg_match('/^\d+$/', $songid)) {        //if arranged song
     } elseif (! ($arrng)) { // arrng == 0 or null
         $arrng = "0";
     } else { // arrng == non-numeric
+        header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
             'message' => 'error! illegal arrng',
@@ -33,6 +35,7 @@ if (preg_match('/^\d+$/', $songid)) {        //if arranged song
         exit;
     }
 } else {
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => 'error! illegal songID',
@@ -52,6 +55,7 @@ try {
     if ($exists) {
         $checkSongExists = True;
     } else {
+        header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
             'message' => 'IDのデータはありません',
@@ -60,7 +64,7 @@ try {
         exit;
     }
 } catch (PDOException $e) {
-
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => "DBError:", //{$e->getMessage()}",
@@ -80,6 +84,7 @@ try {
     $count = $s->fetchAll(PDO::FETCH_COLUMN);
 
     if (intval($count[0]) > 0) { // the song is used in tbvocal(setlist).
+        header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
             'message' => 'セットリスト内で使用されている曲は削除できません',
@@ -95,12 +100,14 @@ try {
         $s->execute();
     }
 } catch (PDOException $e) {
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => "DBError:", //{$e->getMessage()}",
     ]);
     exit;
 }
+header('Content-Type: application/json; charset=UTF-8');
 echo json_encode([
     'success' => true,
 ]);

@@ -13,6 +13,7 @@ if ($auth->isLogged()) {
     //   print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
 } else {
     //403
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => 'Forbidden',
@@ -22,6 +23,7 @@ if ($auth->isLogged()) {
 }
 //先にPOSTデータの正規性チェックではじく
 if (! (preg_match('/^(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $_POST['evdate']) and intval($_POST['evmedia']) > 0 and intval($_POST['evmedia']) < 11 and intval($_POST['evtype']) < 5 and intval($_POST['evtype']) > 0 and $_POST['evtitle'] != '')) {
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => "日付とタイトルまたは選択肢などが正しくありません",
@@ -46,7 +48,7 @@ if ($evwcode === '') {
         $maxinteger_evwcode = intval($max_evwcode[0]);
         $evwcode = strval($maxinteger_evwcode + 1); //overwrite posted data
     } catch (PDOException $e) {
-
+        header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
             'message' => "Error:{$e->getMessage()}",
@@ -70,6 +72,7 @@ try {
 
 
     if ($exists and ($_POST['mode'] ?? '')) { // exist, but new mode!! : mode==1
+        header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
             'message' => '既存のコードは設定できません',
@@ -130,13 +133,14 @@ try {
         ]);
     }
 } catch (PDOException $e) {
-
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => "DBError:", //{$e->getMessage()}",
     ]);
     exit;
 }
+header('Content-Type: application/json; charset=UTF-8');
 echo json_encode([
     'success' => true,
 ]);

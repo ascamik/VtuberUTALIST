@@ -26,12 +26,23 @@ if ($auth->isLogged()) {
     //   putHtmlNavibar('admin');
     //print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
 } else {
-    putHtmlNavibar('');
-    print "<div class=\"normalmessage\">ログインしていません</div>\n\n";
-    //   print "<div class=\"normalmessage\"><a href=\"sen_nowusr.php\"></a>ログインはこちら</a></div>\n\n";
-    putHtmlContainerClose();
-    exit;
-    // ここで終了
+    if ($_POST['seqnum'] ?? '') { // update mode
+        //403
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode([
+            'success' => false,
+            'message' => 'Forbidden',
+        ]);
+        exit;
+        // ここで終了 
+    } else {
+        putHtmlNavibar('');
+        print "<div class=\"normalmessage\">ログインしていません</div>\n\n";
+        //   print "<div class=\"normalmessage\"><a href=\"sen_nowusr.php\"></a>ログインはこちら</a></div>\n\n";
+        putHtmlContainerClose();
+        exit;
+        // ここで終了
+    }
 }
 $errcode = '';
 //print_r($_POST);

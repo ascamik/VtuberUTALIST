@@ -14,8 +14,7 @@ if ($auth->isLogged()) {
 } else {
     $txt = $e->getMessage();
     $errcode = '403'; //.$txt;
-    header('Content - Type: application / json;
-    charset = utf - 8');
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => false,
         'message' => $errcode,
@@ -38,8 +37,7 @@ try {
     } else {
         //rint 'evwcode ng';
         $errcode = 'NOT_FOUND_EVENTCODE ';
-        header('Content - Type: application / json;
-    charset = utf - 8');
+        header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
             'message' => $errcode,
@@ -66,9 +64,8 @@ try {
     ]);
     exit;
 }
-header('Content - Type: application / json;
-    charset = utf - 8');
 
+header('Content-Type: application/json; charset=UTF-8');
 echo json_encode([
     'success' => true,
     'message' => '消去が完了しました',

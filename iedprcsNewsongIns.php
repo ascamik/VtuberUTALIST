@@ -25,11 +25,19 @@ if ($auth->isLogged()) {
     //   putHtmlNavibar('admin');
     //print "<div class=\"normalmessage\">アカウント {$user['email']} でログインしています</div>";
 } else {
-    putHtmlNavibar('');
-    print "<div class=\"normalmessage\">ログインしていません</div>\n\n";
-    //   print "<div class=\"normalmessage\"><a href=\"sen_nowusr.php\"></a>ログインはこちら</a></div>\n\n";
-    putHtmlContainerClose();
+    //403
+    header('Content-Type: application/json; charset=UTF-8');
+    echo json_encode([
+        'success' => false,
+        'message' => 'Forbidden',
+    ]);
     exit;
+    // ここで終了
+    // putHtmlNavibar('');
+    // print "<div class=\"normalmessage\">ログインしていません</div>\n\n";
+    // //   print "<div class=\"normalmessage\"><a href=\"sen_nowusr.php\"></a>ログインはこちら</a></div>\n\n";
+    // putHtmlContainerClose();
+    // exit;
     // ここで終了
 }
 
@@ -63,6 +71,7 @@ if ($sname and $yomi and (array_key_exists($genre, $genreCodeMx))) {
     }
 } else {
     $message = 'タイトル・よみ・ジャンル指定 が空欄か正しくありません';
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
         'success' => true,
         'message' => $message,
@@ -79,6 +88,7 @@ if (! ($ret_status['err'] >= 1)) { //success 成功
     ]);
     exit;
 } else {
+
     echo json_encode([
         'success' => false,
         'message' => $message,
