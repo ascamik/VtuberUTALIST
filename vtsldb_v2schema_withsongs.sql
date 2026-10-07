@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost
--- 生成日時: 2026 年 10 月 05 日 08:48
+-- 生成日時: 2026 年 10 月 07 日 08:07
 -- サーバのバージョン： 11.8.5-MariaDB-log
 -- PHP のバージョン: 8.3.33
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbevent` (
-  `evwcode` varchar(4) NOT NULL,
+  `evwcode` varchar(6) NOT NULL,
   `evdate` date DEFAULT NULL,
   `evtitle` varchar(255) DEFAULT NULL,
   `evurl` varchar(255) DEFAULT NULL,
@@ -840,7 +840,7 @@ CREATE TABLE `tbtag` (
 --
 
 CREATE TABLE `tbvocal` (
-  `evwcode` varchar(4) NOT NULL,
+  `evwcode` varchar(6) NOT NULL,
   `seqnum` int(11) NOT NULL,
   `songid` int(11) DEFAULT NULL,
   `arrng` int(11) DEFAULT NULL,
