@@ -36,6 +36,17 @@ if (! (preg_match('/^(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $_PO
 
 $evwcode = trim($_POST['evwcode'] ?? '');
 
+
+if (! ($evwcode === '' || preg_match('/^[a-zA-Z1-9]{1}\d{0,5}$/', $evwcode))) { // checked format OK:A1234 1234 C a ,NG:0123 1A34 Ab
+    header('Content-Type: application/json; charset=UTF-8');
+    echo json_encode([
+        'success' => false,
+        'message' => "入力したコードが使えません。全体が1〜6文字で、最初の1文字は英字か数字(1-9)が使えます 良い例 1032 A124 e3 a ,悪い例:0123 1A34 Ak 12345678",
+    ]);
+    exit;
+}
+
+
 if ($evwcode === '') {
     //Evwcode automatic creation if it'is blank
     try {
@@ -51,7 +62,7 @@ if ($evwcode === '') {
         header('Content-Type: application/json; charset=UTF-8');
         echo json_encode([
             'success' => false,
-            'message' => "Error:{$e->getMessage()}",
+            'message' => "DBError:", // {$e->getMessage()}",
         ]);
     }
 }
