@@ -1,11 +1,22 @@
 <?php
 require_once 'Encode.php';
+require_once 'V2Module.php';
+
+$siteTitle = "非公式歌リスト"; //ページ最上部に表示される部分を設定します
 
 function putHtmlHeader($title, $h2, $csslk = '')
 {
+
+
     //html escape
     $t = e($title);
     $h2e = e($h2);
+
+
+
+
+
+
 
     $source = <<<EOD
 <!DOCTYPE html>
@@ -14,7 +25,7 @@ function putHtmlHeader($title, $h2, $csslk = '')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ,user-scalable=yes" >
     <meta name="referrer" content="no-referrer">
-    <meta name="copyright" content="(c) ASCAMI.kei 2023-2026">
+    <meta name="copyright" content="(c)  2023-2026">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -36,6 +47,44 @@ EOD;
 
     print $source;
 }
+function putHtmlHeaderV2($title, $h1, $h2, $csslk = '')
+{
+    global $siteTitle;
+
+    //html escape
+    $t = e($title);
+    //    $h1e = e($siteTitle . '〈' . $h1 . '〉');
+    $h1e = e($siteTitle);
+    $h2e = e($h2);
+
+    $source = <<<EOD
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 ,user-scalable=yes" >
+    <meta name="referrer" content="no-referrer">
+    <meta name="copyright" content="(c) 2023-2026">
+    <link rel="stylesheet" href="standardv2.css?b2e5aa59">
+    $csslk
+    <!-- <link rel="stylesheet" href="table-grid-resp.css?b2e5aa2f">-->
+  <!--  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /> -->
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />-->
+    <title>$t</title>
+</head>
+<body>
+<main>
+<div id="container">
+    <div id="main" ontouchstart="">
+        <h1>$h1e</h1>
+<!-- <div class="attention">お知らせ</div>
+ -->
+<h2>$h2e</h2>
+EOD;
+
+    print $source;
+}
+
 
 function putHtmlContainerClose($jscript = '')
 {
@@ -157,11 +206,13 @@ EOD;
 
     print $source;
 }
-function putHtmlNavibarV2($p = "")
+function putHtmlNavibarV2($p = "", $query = "")
 {
-    $exmenu = '';
     if ($p == "admin") {
         $exmenu = '<a href="sen_nowusr.php"><div class="v2navilink adminnavi">管理</div></a>';
+    } else {
+
+        $exmenu = '';
     }
 
     $source = <<<EOD
@@ -172,22 +223,27 @@ function putHtmlNavibarV2($p = "")
                     src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg">--><img
                                     src="home_24dp_2C54B7_FILL0_wght400_GRAD0_opsz24.svg" id="fleurDeLis"></div>
         </a>
-        <a href="allsonglist.php?">
+        <a href="allsonglist.php?{$query}">
             <div class="v2navilink">全曲一覧</div>
         </a>
-        <a href="evlist.php?">
+        <a href="evlist.php?{$query}">
             <div class="v2navilink">配信一覧</div>
         </a>
+        <!--
         <a href="ordrlist.php?">
             <div class="v2navilink">条件指定一覧</div>
-        </a>
+        </a>-->
 {$exmenu}
-
-</div>
+EOD;
+    $source2 = <<<EOD
+        </div>
 </div><!--close navicontainerv2 -->
+
 EOD;
 
     print $source;
+    putHtmlVtSelectListNavi();
+    print $source2;
 }
 
 function putHtmlText($text)
@@ -216,6 +272,7 @@ function putHtmladminmenu()
     <div class="normalmessage">
     <ul class="m">
     <li><a href="index.html">トップページ</a></li>
+    <!--
     <li><a href="insertevs.php">(1)新規イベントデータ作成</a></li>
     <li><a href="insertnvonso2.php">(2)セットリストへ曲追加</a></li>
 <li><a href="udsetlist.php">(3)セットリストの記載内容を修正</a></li>
@@ -224,6 +281,7 @@ function putHtmladminmenu()
     <li><a href="udwsetlist.php">セットリスト変更（曲の追加・削除）</a></li>
     <li><a href="searchsong.php">曲の検索（リストに出ない曲（歌っていない曲）も対象）</a></li>
 <li><a href="ordrlist_ex.php">全曲一覧（曲管理リンク付き）</a></li>
+-->
    <li>*</li>
     <li><a href="sen_dumpw0.php">DBダンプ出力（.../dbb_foldr/archive_db_mysql.dumpを書き出します) </a>【注意】ファイル名は固定で毎回上書きされます. 書き出したダンプファイルをダウンロードするためのリンクは表示されませんので、URLのvsdb以下を左記のパスに書き換えるなど手打ちでダウンロードしてください．ダウンロードにログインは不要です</li>
 

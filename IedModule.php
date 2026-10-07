@@ -474,8 +474,20 @@ function putHtmlQuickPickerSongList()
                         $earrng = intval(e($row['arrng']));
                         $sid = $earrng ? $esongid . '-' . $earrng : $esongid;
                         $scripthtml = "<button class=\"appendSLBtn\" data-songid=\"{$esongid}\" data-arrng=\"{$earrng}\")\">▷</button>";
+                        $search = mb_strtolower(
+                            mb_convert_kana(
+                                implode(' ', [
+                                    $row['sname'],
+                                    $row['artist'],
+                                    $row['vocap'],
+                                    $row['tieup'],
+                                    $row['yomi']
+                                ]),
+                                'asKV'
+                            )
+                        );
             ?>
-                        <div class="<?= $boldcss4helper ?> song-row" data-songid="<?= $esongid ?>" data-arrng="<?= $earrng ?>">
+                        <div class="<?= $boldcss4helper ?> song-row" data-songid="<?= $esongid ?>" data-arrng="<?= $earrng ?>" data-search="<?= e($search) ?>">
 
 
                             <div class="cell"><span title="<?= 'ID=' . $sid ?>"><?= e($row['sname']) ?></a></span></div>
@@ -561,4 +573,20 @@ function putHtmlEventList()
 
 
     <?php
+}
+function putHtmlVtSelectList()
+{
+
+    try {
+        $db = getDb();
+        //SELECT
+        $s = $db->query("select vtcode, vtname from tbvtuber;");
+
+        while ($row = $s->fetch(PDO::FETCH_ASSOC)) {
+            $vtc = intval($row['vtcode']);
+            print "<option value=\"{$vtc}\">{$vtc}:" . e($row['vtname']) . "</option>";
+        }
+    } catch (PDOException $e) {
+        die("Error:{$e->getMessage()}");
+    }
 }

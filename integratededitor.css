@@ -19,7 +19,7 @@
 }
 
 .songlistcontainer {
-    height: 75.5svh;
+    height: 70svh;
     /* 縦サイズの固定値 */
     overflow-y: scroll;
     margin: 0px;
@@ -177,6 +177,14 @@ button.appendSLBtn:hover {
 
 .alert {
     color: #a34808
+}
+
+.alertmsg {
+    color: #f1310f;
+    font-size: 1.2rem;
+    border: solid #be6704 2px;
+    border-radius: 3px;
+    padding: 3px;
 }
 
 #submitbutton>input {
@@ -552,9 +560,106 @@ div#container {
 
 }
 
+/* NewVtuber dialog */
 
+#create-vt {
+    background: #6578ad;
+    color: #ffffff;
+}
 
+#create-vt:hover {
+    background: #3a5481;
+}
 
+/* modal 本体*/
+dialog#vtCreateDialog {
+    width: min(800px, 90vw);
+    max-height: 90vh;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+
+/* 背景 */
+dialog#vtCreateDialog::backdrop {
+    background: rgba(0, 0, 0, .4);
+}
+
+dialog form {
+    background-color: #FFFFFF;
+}
+
+/* 入力欄 */
+#vtCreate input,
+#vtCreate textarea,
+#vtCreate select {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 8px 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-size: 14px;
+}
+
+/* フォーカス */
+#vtCreate input:focus,
+#vtCreate textarea:focus,
+#vtCreate select:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+/* 保存 */
+#saveNewVtBtn {
+    background: #2f80ed;
+    color: white;
+}
+
+/* 削除 */
+#deleteVtBtn {
+    background: #f1e4c6;
+    ;
+    color: #000000;
+}
+
+/* 閉じる */
+#closeCreateVtBtn {
+    background: #6c757d;
+    color: white;
+}
+
+/* ホバー */
+#saveNewVtBtn:hover {
+    opacity: 0.9;
+}
+
+#deleteVtBtn:hover {
+    opacity: 0.9;
+    background-color: #ffa600;
+    color: #FFFFFF;
+}
+
+#closeCreateVtBtn:hover {
+    opacity: 0.9;
+}
+
+.caption {
+    text-align: center;
+    size: 1.2rem;
+    font-weight: 500;
+    margin: 5px auto 10px auto;
+}
+
+.desc {
+    margin: 5px auto 10px auto;
+    size: 0.8rem;
+    text-align: center;
+    color: #0003c9;
+}
 
 
 
@@ -596,9 +701,67 @@ footer {
     display: none;
 }
 
+/*以下逐次検索*/
+.search-area {
+    display: flex;
+    margin-bottom: 5px;
+    height: 2rem;
+    ;
+}
+
+.search-area img {
+    margin: 2px 3px;
+}
 
 
+#searchBox {
+    width: 320px;
+    max-width: 100%;
+    padding: 8px 10px;
+    font-size: 15px;
+    border-radius: 15px 0 0 15px;
+    border: #555 solid 1px;
 
+}
+
+input#searchBox:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+#searchCount {
+    margin-top: 6px;
+    margin-left: 5px;
+    color: #666;
+    font-size: 0.9rem;
+
+}
+
+button.clear-btn {
+
+    right: 10px;
+    top: 50%;
+    height: 2rem;
+    margin: 0px;
+    border: #555 solid;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 0 15px 15px 0;
+    background: none;
+    cursor: pointer;
+    display: block;
+    font-size: 1.2rem;
+    width: 32px;
+    padding: 0px;
+    /* 常に表示 */
+}
+
+.song-hidden {
+    display: none !important;
+}
+
+.adminnone {
+    display: none;
+}
 
 /* スマホ表示 */
 @media (max-width: 1500px) {

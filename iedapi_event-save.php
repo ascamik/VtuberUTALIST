@@ -90,7 +90,8 @@ try {
                 evurl=?,
                 evmedia=?,
                 evtype=?,
-                evdesc=?
+                evdesc=?,
+                vtcode=?
           WHERE evwcode=?'
         );
 
@@ -101,6 +102,7 @@ try {
             $_POST['evmedia'],
             $_POST['evtype'],
             $_POST['evdesc'],
+            $_POST['vtcode'],
             $evwcode,
         ]);
     } else {
@@ -114,7 +116,8 @@ try {
             evurl,
             evmedia,
             evtype,
-            evdesc
+            evdesc,
+            vtcode
         )
         VALUES
         (
@@ -130,6 +133,7 @@ try {
             $_POST['evmedia'],
             $_POST['evtype'],
             $_POST['evdesc'],
+            $_POST['vtcode'],
         ]);
     }
 } catch (PDOException $e) {

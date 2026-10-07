@@ -6,13 +6,14 @@ require_once 'chckdate.php';
 require_once 'Code2text.php';
 require_once 'dbAu.php';
 require_once 'IedModule.php';
+require_once 'v2dbcheck.php';
 
 //mode matrix (0,1,2)=>
 $modemx = ['I', 'E', 'D'];
 
 $title = '統合編集〈管理〉';
 $h2 = "〈管理〉統合編集";
-$css = '<link rel="stylesheet" href="integratededitor.css?b2e5aa58"><link rel="stylesheet" href="table-grid-resp-integed.css?b2e5aa58">';
+$css = '<link rel="stylesheet" href="integratededitor.css?b2e5aa59"><link rel="stylesheet" href="table-grid-resp-integed.css?b2e5aa59">';
 putHtmlHeader($title, $h2, $css);
 
 if ($auth->isLogged()) {
@@ -31,6 +32,18 @@ if ($auth->isLogged()) {
     exit;
     // ここで終了
 }
+$vtchkok = false;
+$vtchkmsg = '';
+[$v2chkok, $v2chkmsg] = v2dbSchemaCheck();
+if (! $v2chkok) { //NG
+    echo "<div class=\"alertmsg\">{$v2chkmsg}<br>このままではV2の歌リストは動作しません。以前のバージョンの歌リストを使っていた場合はデータベース構造のアップデートが必要です。PHPMyAdminを使ってアップグレード用のSQLファイルをインポートするなどしてください。</div>";
+} else {
+    [$vtchkok, $vtchkmsg] = defaultVtCheck();
+    if (! $vtchkok) {
+        echo "<div class=\"alertmsg\">{$vtchkmsg}まず［VT登録］をしてください</div>";
+    }
+}
+
 //check the tbvodraft, empty is initial, draft mode if drafttype is "D", modify mode if drafttype is "E"
 //
 
@@ -51,6 +64,14 @@ $setlistModeDesc['I'] = 'セットリストの新規作成をする場合は、�
 <?php
 print '<div class="editorcontainer">';
 print '<div class="leftpane active">';
+print '<div class="search-area"><img src="search_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg">
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="曲名・よみ・歌手・P・アニメで検索"> <button class="clear-btn">×</button>
+
+    <div id="searchCount"></div>
+</div>';
 print '<div class="integnavi_group">
 <div class="integnavi_link"><a href="#newSongBtn">↑</a></div>
 <div class="integnavi_link"><a href="#song_1">数字／英字</a></div>
@@ -90,7 +111,7 @@ print '</div>'; //centerpane close
 
 
 print '<div class="rightpane">';
-print ' <div class="stickynavi"><div class="guidance_r"><button id="newEventBtn">新規イベント追加</button>イベントの削除・内容を修正する場合は修正したい行をクリックします</div></div>';
+print ' <div class="stickynavi"><div class="guidance_r"><button id="newEventBtn">新規イベント追加</button><button id="create-vt">VT登録</button>イベントの削除・内容を修正する場合は修正したい行をクリックします</div></div>';
 
 putHtmlEventList();
 print '</div>'; //rightpane close
@@ -254,7 +275,13 @@ print '</div>'; //editorcontainer close
                 print "<option value=\"$codenum\">$codenum:$codecaption</option>";
             }
             ?></select>
+        <label for="vtcode">V</label>
+        <!--<input type="number" id="evtype">--><select id="vtcode" name="vtcode">
+            <?php
 
+            putHtmlVtSelectList()
+
+            ?></select>
         <label for="evdesc">説明</label>
         <textarea id="evdesc"></textarea>
 
@@ -320,11 +347,36 @@ print '</div>'; //editorcontainer close
     </form>
 
 </dialog>
+<!-- Vtuber登録-->
+<dialog id="vtCreateDialog">
+    <form id="vtCreate">
+        <?php
+        if ($vtchkok) {
+            print '<div class="caption">配信者(Vtuber等)の追加登録、または名前の修正をします</div>';
+        } else {
+            print '<div class="caption">1人も登録されていません。必ず1人は登録してください</div><div class="desc">&#9432; 2人以上登録すると、サイトに切り替えのプルダウンメニューが表示されます</div>';
+        }
+        ?>
+        <label for="vtced">［新規追加］か、修正する場合は名前を選択します。</label>
+        <!--<input type="number" id="evtype">--><select id="vtced" name="vtced">
+            <?php
+            print '<option value="new">新規追加</option>';
+            putHtmlVtSelectList()
+
+            ?></select>
+        <label for="vtname">登録または修正後の名前を入力してください</label>
+        <input type="text" id="vtname" required>
+        <div class="dialog-buttons">
+            <button type="button" id="saveNewVtBtn">登録</button>
+            <!--<button type="button" id="deleteVtBtn">削除</button>-->
+            <button type="button" id="closeCreateVtBtn">キャンセル</button>
+        </div>
+    </form>
+</dialog>
 <?php
 $jscript = <<<'EOD'
  <script src="iedslsupport.js"></script>
- <script>
-
+<script>
 
 
 /*
@@ -556,6 +608,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+        </script>
+        <script>
+//検索Xボタン処理
+    const inputElement = document.getElementById("searchBox");
+    const clearBtn = document.querySelector('.clear-btn');
+            
+    // Xボタンをクリックしたときの処理
+    clearBtn.addEventListener('click', () => {
+        inputElement.value = ''; // 文字列を空にする
+        inputElement.focus();   // 入力欄にフォーカスを戻す
+        filterRows();
+            });
+// 逐次検索スクリプト
+const rows = [...document.querySelectorAll('.song-row')];
+
+const searchBox = document.getElementById('searchBox');
+const searchCount = document.getElementById('searchCount');
+
+let timer;
+
+searchBox.addEventListener('input', () => {
+
+    clearTimeout(timer);
+
+    timer = setTimeout(filterRows, 120);
+
+});
+
+function filterRows() {
+
+    const words = searchBox.value
+        .normalize('NFKC')
+        .toLowerCase()
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+
+        // 検索文字が空なら全件表示
+    if (words.length === 0) {
+        rows.forEach(row => row.classList.remove('song-hidden'));
+        searchCount.textContent = `${rows.length} / ${rows.length} 件`;
+        return;
+    }
+
+    let visible = 0;
+
+    rows.forEach(row => {
+
+        const target = row.dataset.search;
+
+        const match = words.every(word => target.includes(word));
+
+        if (match) {
+            row.classList.remove('song-hidden');
+            visible++;
+        } else {
+            row.classList.add('song-hidden');
+        }
+
+
+    });
+
+    searchCount.textContent =
+        `${visible} / ${rows . length} 件`;
+}
         </script>
 EOD;
 putHtmlContainerCloseV2($jscript);

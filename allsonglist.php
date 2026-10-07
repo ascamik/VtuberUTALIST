@@ -4,6 +4,8 @@ require_once 'Encode.php';
 require_once 'htmlpkg.php';
 require_once 'chckdate.php';
 require_once 'Relsd2cssclass.php';
+require_once 'V2Module.php';
+
 //require_once 'OrdrSubNcsv.php';
 //   require_once 'Relsd2cssclass.php';
 function s($word)
@@ -19,11 +21,19 @@ function s($word)
     }
     return $html;
 }
+[$vtcode, $vtname] = getVtInfo(); //from $_GET['vtcode']
+// ブランク時のデフォルト設定はV2module.php内で設定しています
+if ($vtcode) {
+    $urlQuery = "vtcode={$vtcode}";
+} else {
+    $urlQuery = 'vtcode=A';
+}
 
-$title = '曲名一覧（全曲）';
+$title = $vtname . '歌リスト' . '曲名一覧（全曲）';
+$h1 = $vtname;
 $h2 = "曲名一覧表示【全曲】";
-$aditionalcss = '<link rel="stylesheet" href="table-grid-resp-allsonglist.css?b2e5aa43"><link rel="stylesheet" href="allsonglist.css?b2e5aa5f">';
-putHtmlHeader($title, $h2, $aditionalcss);
+$aditionalcss = '<link rel="stylesheet" href="table-grid-resp-allsonglist.css?b2e5aa43"><link rel="stylesheet" href="allsonglist.css?b2e5aa60">';
+putHtmlHeaderV2($title, $h1,  $h2, $aditionalcss);
 //putHtmlHeader($title, $h2);
 //putHtmlNavibarV2();
 ?>
@@ -33,12 +43,17 @@ putHtmlHeader($title, $h2, $aditionalcss);
             <div class="v2navilink"><img
                     src="vecteezy_fleur-de-lis-heraldic-symbol_colored.svg"></div>
         </a>
-        <a href="evlist.php?">
+        <a href="evlist.php?<?= $urlQuery ?>">
             <div class="v2navilink">配信一覧</div>
         </a>
+        <!--
         <a href="ordrlist.php?">
             <div class="v2navilink">条件指定一覧</div>
         </a>
+-->
+        <?php
+        putHtmlVtSelectListNavi();
+        ?>
     </div>
     <div class="search-area"><img src="search_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg">
         <input
@@ -163,16 +178,19 @@ $icode2char = ['1' => '数字・英字', 'a' => 'あ（ゔ）', 'k' => 'か', 's
                     //DBの英数字の読みをかなにした場合、英数のページにも表示させるための分岐
                 }
 
-
-                $nomedia = "";
+                if ($vtcode) {
+                    $divide = "tbevent.vtcode = {$vtcode} AND ";
+                } else {
+                    $divide = '';
+                }
                 $on_genre = $dbsearch; //'genre regexp"[VPRGIAo]"';
                 $having = '';
                 // $order = 'order by tbsong.yomi COLLATE utf8mb4_unicode_ci';
                 $order = $sortby;
                 $limit = '';
-
+                $ltdclass = ''; //for smrg utalist custom
                 //$s = $db->query("select tbsong.songid,tbsong.arrng,tbsong.sname,tbsong.yomi,tbsong.artist,tbsong.tieup,tbsong.vocap,tbsong.genre,tbsong.relsd from tbsong where {$nomedia}  {$on_genre}   {$having} {$order} {$limit} ;");
-                $s = $db->query("select tbsong.songid,tbsong.arrng,tbsong.sname,tbsong.yomi,tbsong.artist,tbsong.tieup,tbsong.vocap,tbsong.genre,tbsong.relsd,count(*),max(evdate) from tbvocal join tbsong on tbvocal.songid=tbsong.songid and tbvocal.arrng=tbsong.arrng  join tbevent using(evwcode) where {$nomedia}  {$on_genre} group by tbvocal.songid,tbvocal.arrng  {$having} {$order} {$limit} ;");
+                $s = $db->query("select tbsong.songid,tbsong.arrng,tbsong.sname,tbsong.yomi,tbsong.artist,tbsong.tieup,tbsong.vocap,tbsong.genre,tbsong.relsd,count(*),max(evdate) from tbvocal join tbsong on tbvocal.songid=tbsong.songid and tbvocal.arrng=tbsong.arrng  join tbevent using(evwcode) where {$divide}  {$on_genre} group by tbvocal.songid,tbvocal.arrng  {$having} {$order} {$limit} ;");
 
 
                 //print "<div class=\"list_index\" id=\"song_{$index}\"></div><div class=\"songlistanchor\">{$pagemarker}</div>";
@@ -278,5 +296,15 @@ $icode2char = ['1' => '数字・英字', 'a' => 'あ（ゔ）', 'k' => 'か', 's
 $script = <<<'EOD'
         <script src="allsonglistAX.js"></script>
         <script src="allsonglistSort.js"></script>
+        <script>
+document.getElementById('vtSelect').addEventListener('change', function () {
+
+    if (this.value === '') {
+        return;
+    }
+
+    location.href = location.pathname + '?vtcode=' + encodeURIComponent(this.value);
+});
+</script>
 EOD;
 putHtmlContainerCloseV2($script);

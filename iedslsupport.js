@@ -346,6 +346,9 @@ document
                 document.getElementById('evdesc').value =
                     data.evdesc;
 
+                document.getElementById('vtcode').value =
+                    data.vtcode;
+
                 deleteEvBtn.style.display = '';
 
                 dialog.showModal();
@@ -375,6 +378,7 @@ saveEvBtn.addEventListener('click', async () => {
     formData.append('evmedia', evmedia.value);
     formData.append('evtype', evtype.value);
     formData.append('evdesc', evdesc.value);
+    formData.append('vtcode', vtcode.value);
 
     if (newEventMode === 1) {
 
@@ -609,4 +613,57 @@ deleteSongBtn.addEventListener('click', async () => {
 //閉じる
 closeSongBtn.addEventListener('click', () => {
     dialogSong.close();
+});
+
+
+//VTuber新規登録
+const dialogVt = document.getElementById('vtCreateDialog');
+const link = document.getElementById('create-vt');
+link.addEventListener('click', (e) => {
+    //e.preventDefault(); // ページ移動などのデフォルト動作を止める
+    dialogVt.showModal();
+    vtname.value = '';
+});
+//閉じる
+closeCreateVtBtn.addEventListener('click', () => {
+    dialogVt.close();
+});
+
+//登録
+saveNewVtBtn.addEventListener('click', async () => {
+
+    const formData = new FormData();
+
+    formData.append('vtced', vtced.value);
+    formData.append('vtname', vtname.value);
+
+
+    if (vtname.value == '') {
+
+        alert('登録するVtuberの名前を入力してください');
+        return;
+    }
+
+    const response =
+        await fetch(
+            'vtcreateapi.php',
+            {
+                method: 'POST',
+                body: formData
+            }
+        );
+
+    const result =
+        await response.json();
+
+    if (!result.success) {
+        alert(result.message);
+        return;
+    } else {
+        // alert("正常に登録しました");
+        alert(result.message);
+    }
+    dialogVt.close();
+    //reload要るかもしれない
+    location.reload();
 });

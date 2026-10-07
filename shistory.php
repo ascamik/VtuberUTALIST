@@ -3,7 +3,7 @@ require_once 'DbMa.php';
 require_once 'Encode.php';
 require_once 'htmlpkg.php';
 require_once 'timestamplinker.php';
-
+require_once 'V2Module.php';
 
 //connection to DB
 //Get list of songid  from DB
@@ -29,11 +29,27 @@ if (isset($_GET['sid'])) {
         $sidmarker = $_GET['sid'];
     }
 }
+$dividevtcode = '';
+
+[$vtcode, $vtname] = getVtInfo(); //from $_GET['vtcode']
+if ($vtcode) {
+    $dividevtcode = "tbevent.vtcode = {$vtcode} AND ";
+    $urlQuery = "vtcode={$vtcode}";
+} else {
+    $dividevtcode = '';
+    $urlQuery = 'vtcode=A';
+    $vtname = '全表示';
+}
+
+
+
+
 $title = '曲情報・歌唱歴';
 $h2 = "曲情報・歌唱歴";
+$h1 = $vtname;
 $aditionalcss = '<link rel="stylesheet" href="table-grid-resp-shistory.css?b2e5aacd">';
-putHtmlHeader($title, $h2, $aditionalcss);
-putHtmlNavibarV2();
+putHtmlHeaderV2($title, $h1, $h2, $aditionalcss);
+putHtmlNavibarV2('', $urlQuery);
 ?>
 
 <div id="toptableoutline">
@@ -134,7 +150,7 @@ putHtmlNavibarV2();
             $evtypeIconFlag = 0;
 
             //SELECT song history
-            $s = $db->query("select evdate,seqnum,time,sname,memo,evtitle,tbevent.evwcode,evurl,evmedia,evtype from tbvocal join tbsong on tbvocal.songid=tbsong.songid and tbvocal.arrng= tbsong.arrng join tbevent on tbvocal.evwcode=tbevent.evwcode where tbvocal.songid=\"{$sidmarker}\" order by evdate;");
+            $s = $db->query("select evdate,seqnum,time,sname,memo,evtitle,tbevent.evwcode,evurl,evmedia,evtype from tbvocal join tbsong on tbvocal.songid=tbsong.songid and tbvocal.arrng= tbsong.arrng join tbevent on tbvocal.evwcode=tbevent.evwcode where {$dividevtcode}tbvocal.songid=\"{$sidmarker}\" order by evdate;");
 
             while ($row = $s->fetch(PDO::FETCH_ASSOC)) {
                 //print_r ($row);
@@ -164,7 +180,7 @@ putHtmlNavibarV2();
                         <?php
                         //print e($row['evurl']);
                         $evtypeIconTag = $row['evtype'] == 4 ? '<img src="handshake_28dp_8C1AF6_FILL0_wght400_GRAD0_opsz24.svg" class="evtype_icon">' : '';
-                        print '<a href="setlist.php?ev=' . e($row['evwcode']) . '">' . $evtypeIconTag . e($row['evtitle']) . '</a>';
+                        print '<a href="setlist.php?ev=' . e($row['evwcode'] . '&' . $urlQuery) . '">' . $evtypeIconTag . e($row['evtitle']) . '</a>';
                         ?>
                     </div>
 
@@ -186,4 +202,16 @@ putHtmlNavibarV2();
     ?>
 </div>
 <?php
-putHtmlContainerCloseV2();
+$script = <<<"EOD"
+<script>
+document.getElementById('vtSelect').addEventListener('change', function () {
+
+    if (this.value === '') {
+        return;
+    }
+
+    location.href = location.pathname + '?sid={$sidmarker}&vtcode=' + encodeURIComponent(this.value);
+});
+</script>
+EOD;
+putHtmlContainerCloseV2($script);

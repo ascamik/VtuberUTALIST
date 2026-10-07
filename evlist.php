@@ -7,7 +7,18 @@
 require_once 'DbMa.php';
 require_once 'Encode.php';
 require_once 'htmlpkg.php';
+require_once 'V2Module.php';
 //
+[$vtcode, $vtname] = getVtInfo(); //from $_GET['vtcode'] No need to sanitize
+if ($vtcode) {
+    $sql = "WHERE vtcode = {$vtcode}";
+    $urlQuery = "vtcode={$vtcode}";
+} else {
+    $sql = '';
+    $urlQuery = 'vtcode=A';
+    $vtname = '全表示';
+}
+
 $rows = isset($_COOKIE['rows']) ? (int)$_COOKIE['rows'] : 200;
 $order = isset($_COOKIE['order']) ? $_COOKIE['order'] : 'desc';
 // 
@@ -16,7 +27,7 @@ $pageSize = $rows; //event counts of one page
 try {
     $db = getDb();
     //SELECT count of event 
-    $s = $db->query("select count(*) from tbevent;");
+    $s = $db->query("select count(*) from tbevent {$sql};");
 
     $eventCount = $s->fetch(PDO::FETCH_COLUMN);   //integer  
     // print_r($evwcode);
@@ -44,7 +55,7 @@ if ($pageSize < $eventCount) {
         if ($p == $currentPage) {
             $pageNavi .= "【{$p}】";
         } else {
-            $pageNavi .= "<a href=evlist.php?p={$p}> ［{$p}］ </a>"; //ファイル名を変えた場合このリンクを変えてください
+            $pageNavi .= "<a href=evlist.php?{$urlQuery}&p={$p}> ［{$p}］ </a>"; //ファイル名を変えた場合このリンクを変えてください
         }
     }
     $pageNavi .= ' ';
@@ -56,11 +67,12 @@ if ($pageSize < $eventCount) {
     $pageTitle = "";
 }
 
-$title = '歌配信一覧';
+$title = $vtname . '歌配信一覧';
+$h1 = $vtname;
 $h2 = "歌配信一覧" . $pageTitle;
 $aditionalcss = '<link rel="stylesheet" href="eventlistresp.css?b2e5aacf">';
-putHtmlHeader($title, $h2, $aditionalcss);
-putHtmlNavibarV2();
+putHtmlHeaderV2($title, $h1, $h2, $aditionalcss);
+putHtmlNavibarV2('', $urlQuery);
 ?>
 
 <div id="tableoutline">
@@ -92,7 +104,7 @@ putHtmlNavibarV2();
             try {
                 $db = getDb();
                 //SELECT
-                $s = $db->query("select * from tbevent order by evdate $orderSQL $pagenation;");
+                $s = $db->query("select * from tbevent {$sql} order by evdate $orderSQL $pagenation;");
 
                 while ($row = $s->fetch(PDO::FETCH_ASSOC)) {
                     //print_r ($row);
@@ -104,7 +116,7 @@ putHtmlNavibarV2();
                         <td><?= e($row['evdate']) ?></td>
                         <td><a href="<?php
                                         //print e($row['evurl']);
-                                        print 'setlist.php?ev=' . e($row['evwcode']);
+                                        print 'setlist.php?ev=' . e($row['evwcode'] . '&' . $urlQuery);
                                         ?>"><?= $row['evtype'] == 4 ? '<img src="handshake_28dp_8C1AF6_FILL0_wght400_GRAD0_opsz24.svg" class="evtype_icon">' : '' ?>
                                 <?= e($row['evtitle']) ?></a></td>
 
@@ -207,7 +219,16 @@ function closeModal() {
   modal.style.display = "none";
 }
 </script>
+<script>
+document.getElementById('vtSelect').addEventListener('change', function () {
 
+    if (this.value === '') {
+        return;
+    }
+
+    location.href = location.pathname + '?vtcode=' + encodeURIComponent(this.value);
+});
+</script>
 
 
 EOD;

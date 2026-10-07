@@ -7,7 +7,7 @@ require_once 'htmlpkg.php';
 require_once 'timestamplinker.php';
 require_once 'Code2text.php';
 require_once 'Relsd2cssclass.php';
-
+require_once 'V2Module.php';
 
 
 //connection to DB
@@ -34,42 +34,51 @@ if (isset($_GET['ev'])) {
         $evmarker = $_GET['ev'];
     }
 }
-// $title='歌配信詳細情報';
-// $h2="歌配信セットリスト[".e($evmarker)."]";
-// putHtmlHeader($title,$h2);
-// putHtmlNavibar();
-?>
-
-
-
-<?php
-
 
 //connection to DB
 try {
     $db = getDb();
     //SELECT event detail
-    $sev = $db->query("select evwcode,evdate,evtitle,evurl,evmedia,evtype,evdesc from tbevent where evwcode=\"{$evmarker}\" ;");
+    $sev = $db->query("select evwcode,evdate,evtitle,evurl,evmedia,evtype,evdesc,vtcode from tbevent where evwcode=\"{$evmarker}\" ;");
 
     while ($evdata = $sev->fetch(PDO::FETCH_ASSOC)) {
 
         //イベント詳細表示 ループを想定しているが、DBでevwcodeの重複を禁じているので、while2回めはないはず
         $event_url = $evdata['evurl'];
         $evmedia = $evdata['evmedia'];
+        $vtcode = $evdata['vtcode'];
+        [$vtRescode, $vtname] = getVtInfo($vtcode);
+        if ($vtcode != $vtRescode) {
+            $vtname = '*';
+        }
 
         if (intval($evmedia) > 9) {
             $ev_subtitle = "動画曲目リスト";
         } else {
             $ev_subtitle = "歌配信セットリスト";
         }
+        //$naviUrlQuery = getVtUrlQuery();
+        $vtname = '全表示';
+        [$getVtcode, $getvtname] = getVtInfo(); //from $_GET['vtcode'] No need to sanitize
+        if ($getVtcode) {
+            if ($getVtcode != $vtRescode) {
+                $urlQuery = 'vtcode=A';
+            } else {
+                $vtname = $getvtname;
+                $urlQuery = "vtcode={$vtcode}";
+            }
+        } else {
 
+            $urlQuery = 'vtcode=A';
+        }
         $title = '配信詳細情報/' . $ev_subtitle;
+        $h1 = $vtname;
         $h2 = $ev_subtitle . "[" . e($evmarker) . "]";
         $aditionalcss = '<link rel="stylesheet" href="table-grid-resp-setlist.css?b2e5ab03">';
-        putHtmlHeader($title, $h2, $aditionalcss);
-        //putHtmltext('タイムスタンプの時刻をクリック／タップすると動画の再生が開始します。音量等にご注意ください。');
-        putHtmlNavibarV2();
 
+        putHtmlHeaderV2($title, $h1, $h2, $aditionalcss);
+        //putHtmltext('タイムスタンプの時刻をクリック／タップすると動画の再生が開始します。音量等にご注意ください。');
+        putHtmlNavibarV2('', $urlQuery);
 
 
 
@@ -98,7 +107,7 @@ try {
                     <tr class="info">
                         <td><?= e($evdata['evdate']) ?></td>
                         <td><?= e(evmediaC2t($evdata['evmedia'])) ?></td>
-                        <td><?= e(evtypeC2t($evdata['evtype'])) ?></td>
+                        <td><?= e($vtname . ' ' . evtypeC2t($evdata['evtype'])) ?></td>
                     </tr>
                     <tr class="info">
                         <td colspan="3">
@@ -142,6 +151,7 @@ try {
         </div>
     <?php
     }
+    //$urlQuery = 'vtcode=' . $vtcode; //getVtUrlQuery(); // example vtcode=1
     ?>
     <div id="jsbutton">
         <div class="backbutton"><a href="javascript:history.back()"><img src="arrow_back.svg"><span class="jsbuttonspan">戻る</span></a></div>
@@ -221,7 +231,7 @@ try {
                         <div class="cell">
                             <?php
                             //
-                            print '<a href="shistory.php?sid=' . e($row['songid']) . '">' . e($row['sname']) . '</a>';
+                            print '<a href="shistory.php?sid=' . e($row['songid'] . '&' . $urlQuery) . '">' . e($row['sname']) . '</a>';
                             ?>
                         </div>
 
@@ -338,6 +348,16 @@ $script = <<<EOD
          console.error('Error: ', err);
      });
         }
+</script>
+<script>
+document.getElementById('vtSelect').addEventListener('change', function () {
+
+    if (this.value === '') {
+        return;
+    }
+
+    location.href = location.pathname + '?ev={$evmarker}&vtcode=' + encodeURIComponent(this.value);
+});
 </script>
 EOD;
 putHtmlContainerCloseV2($script);

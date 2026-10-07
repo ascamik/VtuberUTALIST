@@ -995,10 +995,24 @@ input#toggle {
     height: 1.4rem;
 }
 
+#vtSelect {
+    padding: 1px;
+    border-radius: 3px;
+    background-color: #FFF;
+    border: none;
+}
+
+#vtSelect:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+
 .adminnavi {
     border: 1px #e9a852 solid;
     background-color: #e9a852;
 }
+
 
 @media(max-width:890px) {
 

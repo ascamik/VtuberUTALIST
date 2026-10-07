@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost
--- 生成日時: 2026 年 9 月 28 日 08:23
+-- 生成日時: 2026 年 10 月 05 日 08:48
 -- サーバのバージョン： 11.8.5-MariaDB-log
 -- PHP のバージョン: 8.3.33
 
@@ -34,7 +34,8 @@ CREATE TABLE `tbevent` (
   `evurl` varchar(255) DEFAULT NULL,
   `evmedia` int(11) DEFAULT NULL,
   `evtype` int(11) DEFAULT NULL,
-  `evdesc` text DEFAULT NULL
+  `evdesc` text DEFAULT NULL,
+  `vtcode` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -810,6 +811,31 @@ INSERT INTO `tbsong` (`songid`, `arrng`, `sname`, `yomi`, `artist`, `tieup`, `vo
 -- --------------------------------------------------------
 
 --
+-- テーブルの構造 `tbsongtag`
+--
+
+CREATE TABLE `tbsongtag` (
+  `songid` int(11) NOT NULL,
+  `arrng` int(11) NOT NULL DEFAULT 0,
+  `tagid` int(11) NOT NULL,
+  `score` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `tbtag`
+--
+
+CREATE TABLE `tbtag` (
+  `tagid` int(11) NOT NULL,
+  `tagname` varchar(100) NOT NULL,
+  `tagrank` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- --------------------------------------------------------
+
+--
 -- テーブルの構造 `tbvocal`
 --
 
@@ -839,6 +865,18 @@ CREATE TABLE `tbvodraft` (
   `comment` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `tbvtuber`
+--
+
+CREATE TABLE `tbvtuber` (
+  `vtcode` int(11) NOT NULL,
+  `vtname` varchar(32) NOT NULL,
+  `flag` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 --
 -- ダンプしたテーブルのインデックス
 --
@@ -859,6 +897,21 @@ ALTER TABLE `tbsong`
   ADD KEY `yomi` (`yomi`);
 
 --
+-- テーブルのインデックス `tbsongtag`
+--
+ALTER TABLE `tbsongtag`
+  ADD PRIMARY KEY (`songid`,`arrng`,`tagid`),
+  ADD UNIQUE KEY `songid` (`songid`);
+
+--
+-- テーブルのインデックス `tbtag`
+--
+ALTER TABLE `tbtag`
+  ADD PRIMARY KEY (`tagid`),
+  ADD UNIQUE KEY `tagid` (`tagid`),
+  ADD KEY `tagname` (`tagname`);
+
+--
 -- テーブルのインデックス `tbvocal`
 --
 ALTER TABLE `tbvocal`
@@ -869,6 +922,28 @@ ALTER TABLE `tbvocal`
 --
 ALTER TABLE `tbvodraft`
   ADD PRIMARY KEY (`drafttype`,`evwcode`,`seqnum`);
+
+--
+-- テーブルのインデックス `tbvtuber`
+--
+ALTER TABLE `tbvtuber`
+  ADD PRIMARY KEY (`vtcode`);
+
+--
+-- ダンプしたテーブルの AUTO_INCREMENT
+--
+
+--
+-- テーブルの AUTO_INCREMENT `tbtag`
+--
+ALTER TABLE `tbtag`
+  MODIFY `tagid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- テーブルの AUTO_INCREMENT `tbvtuber`
+--
+ALTER TABLE `tbvtuber`
+  MODIFY `vtcode` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

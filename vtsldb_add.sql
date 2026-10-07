@@ -1,3 +1,4 @@
+-- 初期のスクリプトから新管理画面のV1.*にアップグレードするときにデータベースへこのファイルをインポートします。テーブルtbvodraftが追加されます
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
