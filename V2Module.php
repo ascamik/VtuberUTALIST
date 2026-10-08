@@ -6,15 +6,21 @@ require_once 'Encode.php';
 function getVtInfo($vtcode = 'GET')
 {
     global $defaultVtuber;
-    if (!in_array($defaultVtuber, [1, 'A'])) { //Sanitization process
-        $defaultVtuber = 1;
-    }
+    global $enableAllVselect;
+    // if (!in_array($defaultVtuber, [1, 'A'])) { //Limit A or 1
+    //     $defaultVtuber = 1;
+    // }
     if ($vtcode === 'GET') {
         $vtcode = trim($_GET['vtcode'] ?? $defaultVtuber);
     }
 
     if ($vtcode === 'A') {
-        return ['', '全表示'];
+        if ($enableAllVselect) {
+
+            return ['', '全表示'];
+        } else {
+            $vtcode = '1';
+        }
     }
     $vtcode = intval($vtcode); //Sanitization process
     try {
@@ -46,6 +52,7 @@ function getVtUrlQuery()
 
 function putHtmlVtSelectListNavi()
 {
+    global $enableAllVselect;
 
     $vtcode = getVtInfo();
     if ($vtcode[0] == "") {
@@ -79,8 +86,10 @@ function putHtmlVtSelectListNavi()
 
     if ($count >= 2) {
         print "<div class=\"v2navilink adminnone\"><select id=\"vtSelect\">
-<option value=\"\">選択してください</option>
-<option value=\"A\" {$selA}>全表示</option>";
+<option value=\"\">選択してください</option>";
+        if ($enableAllVselect) {
+            print "<option value=\"A\" {$selA}>全表示</option>";
+        }
         print $html;
         print "</select></div>";
     }

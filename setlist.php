@@ -47,8 +47,8 @@ try {
         $event_url = $evdata['evurl'];
         $evmedia = $evdata['evmedia'];
         $vtcode = $evdata['vtcode'];
-        [$vtRescode, $vtname] = getVtInfo($vtcode);
-        if ($vtcode != $vtRescode) {
+        [$evVtcode, $vtname] = getVtInfo($vtcode);
+        if ($vtcode != $evVtcode) {
             $vtname = '*';
         }
 
@@ -61,8 +61,13 @@ try {
         $vtname = '全表示';
         [$getVtcode, $getvtname] = getVtInfo(); //from $_GET['vtcode'] No need to sanitize
         if ($getVtcode) {
-            if ($getVtcode != $vtRescode) {
-                $urlQuery = 'vtcode=A';
+            if ($getVtcode != $evVtcode) {
+                if ($enableAllVselect) {
+                    $urlQuery = 'vtcode=A';
+                } else {
+                    $urlQuery = "vtcode={$evVtcode}"; //全表示モード禁止の場合、イベントのVに切り替える
+
+                }
             } else {
                 $vtname = $getvtname;
                 $urlQuery = "vtcode={$vtcode}";
