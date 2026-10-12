@@ -47,7 +47,7 @@ interface ConfigInterface
      * @return Config
      * @todo: change return type to self at PHP 7.4
      */
-    public function setEMailValidator(callable $handler = null):Config;
+    public function setEMailValidator(?callable $handler = null): Config;
 
     /**
      * Add custom password validator
@@ -56,7 +56,7 @@ interface ConfigInterface
      * @return Config
      * @todo: change return type to self at PHP 7.4
      */
-    public function setPasswordValidator(callable $handler = null):Config;
+    public function setPasswordValidator(?callable $handler = null): Config;
 
     /**
      * Update localization dictionary from PHP Array (result of `phpauth/phpauth.l10n` package)
@@ -65,7 +65,7 @@ interface ConfigInterface
      * @return $this
      * @todo: change return type to self at PHP 7.4
      */
-    public function setLocalization(array $dictionary):Config;
+    public function setLocalization(array $dictionary): Config;
 
     /**
      * Add custom mailer. Not implemented now.
@@ -74,7 +74,7 @@ interface ConfigInterface
      * @return $this
      * @todo: change return type to self at PHP 7.4
      */
-    public function setCustomMailer(callable $handler = null):Config;
+    public function setCustomMailer(?callable $handler = null): Config;
 
     /**
      * set Captcha Validator
@@ -83,7 +83,5 @@ interface ConfigInterface
      * @return $this
      * @todo: change return type to self at PHP 7.4
      */
-    public function setCaptchaValidator(callable $handler = null):Config;
-
-
+    public function setCaptchaValidator(?callable $handler = null): Config;
 }

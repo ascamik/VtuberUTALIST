@@ -97,59 +97,58 @@ class Config implements ConfigInterface
         $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         switch ($config_type) {
-            case self::CONFIG_TYPE_INI : {
-                if (empty($config_source)) {
-                    throw new RuntimeException('PHPAuth: config type is FILE, but no source file declared!');
+            case self::CONFIG_TYPE_INI: {
+                    if (empty($config_source)) {
+                        throw new RuntimeException('PHPAuth: config type is FILE, but no source file declared!');
+                    }
+
+                    // replace beginner '$' in filepath to application root directory
+                    $source = self::resolveAppRootPath($config_source);
+
+                    if (!is_readable($source)) {
+                        throw new RuntimeException("PHPAuth: config type is FILE, declared as {$source}, but file not readable or not exist");
+                    }
+
+                    // load configuration
+                    $this->config = parse_ini_file($source);
+
+                    break;
                 }
-
-                // replace beginner '$' in filepath to application root directory
-                $source = self::resolveAppRootPath($config_source);
-
-                if (!is_readable($source)) {
-                    throw new RuntimeException("PHPAuth: config type is FILE, declared as {$source}, but file not readable or not exist");
-                }
-
-                // load configuration
-                $this->config = parse_ini_file($source);
-
-                break;
-            }
             case self::CONFIG_TYPE_ARRAY: {
-                if (empty($config_source)) {
-                    throw new RuntimeException('PHPAuth: config type is ARRAY, but source config is EMPTY');
+                    if (empty($config_source)) {
+                        throw new RuntimeException('PHPAuth: config type is ARRAY, but source config is EMPTY');
+                    }
+
+                    // get configuration from given array
+                    $this->config = $config_source;
+
+                    break;
                 }
-
-                // get configuration from given array
-                $this->config = $config_source;
-
-                break;
-            }
             case self::CONFIG_TYPE_JSON: {
-                throw new RuntimeException('PHPAuth: Config type JSON not supported now');
-            }
-            case self::CONFIG_TYPE_YML: {
-                throw new RuntimeException('PHPAuth: Config type YAML not supported now');
-            }
-            case self::CONFIG_TYPE_XML: {
-                throw new RuntimeException('PHPAuth: Config type XML not supported now');
-            }
-            case self::CONFIG_TYPE_SQL:
-            default:
-            {
-                // is 'SQL' or EMPTY value
-                $this->config_table = (empty($config_source)) ? 'phpauth_config' : $config_source;
-
-                if ($this->checkTableExists($this->config_table) === false) {
-                    throw new RuntimeException("PHPAuth: Config table `{$this->config_table}` NOT PRESENT in given database");
+                    throw new RuntimeException('PHPAuth: Config type JSON not supported now');
                 }
+            case self::CONFIG_TYPE_YML: {
+                    throw new RuntimeException('PHPAuth: Config type YAML not supported now');
+                }
+            case self::CONFIG_TYPE_XML: {
+                    throw new RuntimeException('PHPAuth: Config type XML not supported now');
+                }
+            case self::CONFIG_TYPE_SQL:
+            default: {
+                    // is 'SQL' or EMPTY value
+                    $this->config_table = (empty($config_source)) ? 'phpauth_config' : $config_source;
 
-                $this->config = $this
-                    ->dbh
-                    ->query("SELECT setting, value FROM {$this->config_table} ORDER BY setting")
-                    ->fetchAll(PDO::FETCH_KEY_PAIR);
+                    if ($this->checkTableExists($this->config_table) === false) {
+                        throw new RuntimeException("PHPAuth: Config table `{$this->config_table}` NOT PRESENT in given database");
+                    }
 
-                break;
-            }
+                    $this->config = $this
+                        ->dbh
+                        ->query("SELECT setting, value FROM {$this->config_table} ORDER BY setting")
+                        ->fetchAll(PDO::FETCH_KEY_PAIR);
+
+                    break;
+                }
         } // end switch
 
         $this->setForgottenDefaults(); // Danger foreseen is half avoided.
@@ -184,29 +183,29 @@ class Config implements ConfigInterface
          */
         switch ($this->config['translation_source']) {
             case 'php': {
-                $lang_file = __DIR__ . DIRECTORY_SEPARATOR . '../languages' . DIRECTORY_SEPARATOR . "{$site_language}.php";
-                if (is_readable($lang_file)) {
-                    $dictionary_new = include $lang_file;
+                    $lang_file = __DIR__ . DIRECTORY_SEPARATOR . '../languages' . DIRECTORY_SEPARATOR . "{$site_language}.php";
+                    if (is_readable($lang_file)) {
+                        $dictionary_new = include $lang_file;
+                    }
+                    break;
                 }
-                break;
-            }
             case 'ini': {
-                $lang_file = __DIR__ . DIRECTORY_SEPARATOR . '../languages' . DIRECTORY_SEPARATOR . "{$site_language}.ini";
+                    $lang_file = __DIR__ . DIRECTORY_SEPARATOR . '../languages' . DIRECTORY_SEPARATOR . "{$site_language}.ini";
 
-                if (is_readable($lang_file)) {
-                    $dictionary_new = parse_ini_file($lang_file);
+                    if (is_readable($lang_file)) {
+                        $dictionary_new = parse_ini_file($lang_file);
+                    }
+                    break;
                 }
-                break;
-            }
             case 'sql': {
-                if ($this->config['table_translations'] && $this->checkTableExists($this->config['table_translations'])) {
-                    $dictionary_new =
-                        $this
+                    if ($this->config['table_translations'] && $this->checkTableExists($this->config['table_translations'])) {
+                        $dictionary_new =
+                            $this
                             ->dbh
                             ->query("SELECT `translation_key`, `{$site_language}` as `lang` FROM {$this->config['table_translations']} ")
                             ->fetchAll(PDO::FETCH_KEY_PAIR);
+                    }
                 }
-            }
         }
         $this->setLocalization($dictionary_new);
         /*
@@ -214,7 +213,7 @@ class Config implements ConfigInterface
          */
     }
 
-    public function setLocalization(array $dictionary = []):Config
+    public function setLocalization(array $dictionary = []): Config
     {
         $dictionary_default = self::getForgottenDictionary();
 
@@ -237,7 +236,7 @@ class Config implements ConfigInterface
      */
     public function __get(string $setting)
     {
-        return array_key_exists($setting, $this->config) ? $this->config[ $setting ] : null;
+        return array_key_exists($setting, $this->config) ? $this->config[$setting] : null;
     }
 
     public function getAll(): array
@@ -259,12 +258,12 @@ class Config implements ConfigInterface
             $query_prepared = $this->dbh->prepare("UPDATE {$this->config_table} SET value = :value WHERE setting = :setting");
 
             if ($query_prepared->execute(['value' => $value, 'setting' => $setting])) {
-                $this->config[ $setting ] = $value;
+                $this->config[$setting] = $value;
 
                 return true;
             }
         } else {
-            $this->config[ $setting ] = $value;
+            $this->config[$setting] = $value;
         }
 
         return false;
@@ -329,7 +328,7 @@ class Config implements ConfigInterface
     protected function repairConfigValue(string $setting, $default_value)
     {
         if (!isset($this->config[$setting])) {
-            $this->config[ $setting ] = $default_value;
+            $this->config[$setting] = $default_value;
         }
     }
 
@@ -339,7 +338,7 @@ class Config implements ConfigInterface
      * @param string|null $table
      * @return bool
      */
-    protected function checkTableExists(string $table = null):bool
+    protected function checkTableExists(?string $table = null): bool
     {
         if (empty($table)) {
             return false;
@@ -347,29 +346,29 @@ class Config implements ConfigInterface
 
         switch ($this->dbh->getAttribute(PDO::ATTR_DRIVER_NAME)) {
             case 'pgsql': {
-                $sth = $this->dbh->query("SELECT * FROM pg_tables WHERE tablename = '{$table}' ;");
-                return (bool)$sth->rowCount();
-                break;
-            }
-            case 'mysql': {
-                $sth = $this->dbh->query("SELECT EXISTS(SELECT 1 FROM information_schema.TABLES WHERE TABLE_NAME = '{$table}' AND TABLE_SCHEMA in (SELECT DATABASE()));");
-                return (bool)$sth->fetchColumn();
-                break;
-            }
-            case 'sqlite': {
-                $sth = $this->dbh->query("PRAGMA table_info({$table})  ");
-                $schema = $sth->fetchAll();
-                return (!empty($schema));
-            }
-            default: {
-                // Legacy databases (MS SQL, Informix and so on)
-                try {
-                    $this->dbh->query("SELECT * FROM {$table} LIMIT 1;");
-                } catch (PDOException $e) {
-                    return false;
+                    $sth = $this->dbh->query("SELECT * FROM pg_tables WHERE tablename = '{$table}' ;");
+                    return (bool)$sth->rowCount();
+                    break;
                 }
-                return true;
-            }
+            case 'mysql': {
+                    $sth = $this->dbh->query("SELECT EXISTS(SELECT 1 FROM information_schema.TABLES WHERE TABLE_NAME = '{$table}' AND TABLE_SCHEMA in (SELECT DATABASE()));");
+                    return (bool)$sth->fetchColumn();
+                    break;
+                }
+            case 'sqlite': {
+                    $sth = $this->dbh->query("PRAGMA table_info({$table})  ");
+                    $schema = $sth->fetchAll();
+                    return (!empty($schema));
+                }
+            default: {
+                    // Legacy databases (MS SQL, Informix and so on)
+                    try {
+                        $this->dbh->query("SELECT * FROM {$table} LIMIT 1;");
+                    } catch (PDOException $e) {
+                        return false;
+                    }
+                    return true;
+                }
         } // switch
 
         return false;
@@ -390,7 +389,7 @@ class Config implements ConfigInterface
     /* ==== Set custom handlers ==== */
     /* ============================= */
 
-    public function setEMailValidator(callable $handler = null):Config
+    public function setEMailValidator(?callable $handler = null): Config
     {
         if (is_callable($handler)) {
             $this->emailValidator = $handler;
@@ -399,7 +398,7 @@ class Config implements ConfigInterface
         return $this;
     }
 
-    public function setPasswordValidator(callable $handler = null):Config
+    public function setPasswordValidator(?callable $handler = null): Config
     {
         if (is_callable($handler)) {
             $this->passwordValidator = $handler;
@@ -414,7 +413,7 @@ class Config implements ConfigInterface
      * @param callable|null $handler
      * @return $this
      */
-    public function setCustomMailer(callable $handler = null):Config
+    public function setCustomMailer(?callable $handler = null): Config
     {
         if (is_callable($handler)) {
             $this->customMailer = $handler;
@@ -430,7 +429,7 @@ class Config implements ConfigInterface
      * @param array $captcha_config
      * @return $this
      */
-    public function setCaptchaValidator(callable $handler = null, array $captcha_config = []):Config
+    public function setCaptchaValidator(?callable $handler = null, array $captcha_config = []): Config
     {
         if (is_callable($handler)) {
             $this->captchaHandler = $handler;
@@ -493,5 +492,4 @@ class Config implements ConfigInterface
 
         return $this;
     }*/
-
 }
