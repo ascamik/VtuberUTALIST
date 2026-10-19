@@ -53,6 +53,11 @@ function getVtUrlQuery()
 function putHtmlVtSelectListNavi()
 {
     global $enableAllVselect;
+    global $disableVtSelectMenu;
+
+    if ($disableVtSelectMenu) {
+        return; // no display a pulldown menu
+    }
 
     $vtcode = getVtInfo();
     if ($vtcode[0] == "") {

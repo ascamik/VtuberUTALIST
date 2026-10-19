@@ -9,3 +9,7 @@ $defaultVtuber = '1'; //デフォルトでコード1のVtuberを表示します
 //以下の設定を変更する場合は注意してください
 $enableAllVselect = true; //プルダウンやパラメータで'A'（全表示）を使用する場合true
 //$enableAllVselect = false; //falseにすると禁止します $defaultVtuber='A' の設定がある場合は強制的に $defaultVtuber='1'とします
+//
+//次の設定をtrueにすると、メニューバーのプルダウンを常に非表示にします
+$disableVtSelectMenu = false;
+//$disableVtSelectMenu = true; //true
