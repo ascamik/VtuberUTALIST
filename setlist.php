@@ -47,10 +47,10 @@ try {
         $event_url = $evdata['evurl'];
         $evmedia = $evdata['evmedia'];
         $vtcode = $evdata['vtcode'];
-        [$evVtcode, $vtname] = getVtInfo($vtcode);
-        if ($vtcode != $evVtcode) {
-            $vtname = '*';
-        }
+        [$evVtcode, $evVtname] = getVtInfo($vtcode);
+        //if ($vtcode != $evVtcode) {
+        //$vtname = '*';
+        //}
 
         if (intval($evmedia) > 9) {
             $ev_subtitle = "動画曲目リスト";
@@ -62,11 +62,11 @@ try {
         [$getVtcode, $getvtname] = getVtInfo(); //from $_GET['vtcode'] No need to sanitize
         if ($getVtcode) {
             if ($getVtcode != $evVtcode) {
+                $evVtname = '( ' . $evVtname . ') ';
                 if ($enableAllVselect) {
                     $urlQuery = 'vtcode=A';
                 } else {
                     $urlQuery = "vtcode={$evVtcode}"; //全表示モード禁止の場合、イベントのVに切り替える
-
                 }
             } else {
                 $vtname = $getvtname;
@@ -112,7 +112,7 @@ try {
                     <tr class="info">
                         <td><?= e($evdata['evdate']) ?></td>
                         <td><?= e(evmediaC2t($evdata['evmedia'])) ?></td>
-                        <td><?= e($vtname . ' ' . evtypeC2t($evdata['evtype'])) ?></td>
+                        <td><?= e($evVtname . ' ' . evtypeC2t($evdata['evtype'])) ?></td>
                     </tr>
                     <tr class="info">
                         <td colspan="3">
